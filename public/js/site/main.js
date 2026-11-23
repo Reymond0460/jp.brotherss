@@ -12,6 +12,7 @@ import { bindBusiness } from './components/business-bind.js';
 import { initBooking } from './components/booking.js';
 import { initCookieBanner } from './components/cookie-banner.js';
 import { initHeader } from './components/header.js';
+import { initGallery } from './components/gallery.js';
 import { initHero } from './components/hero.js';
 import { initLocation } from './components/location.js';
 import { initMyBooking } from './components/my-booking.js';
@@ -37,6 +38,7 @@ async function boot() {
 
   const context = { repo, catalog };
   bindBusiness(catalog.business);
+  initGallery(context);
   initPromos(context);
   initServices(context);
   initBooking(context);

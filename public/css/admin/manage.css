@@ -147,3 +147,57 @@
 .slot-picker {
   min-height: 3rem;
 }
+
+/* Galería de fotos */
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 14rem), 1fr));
+  gap: var(--s-4);
+}
+
+.photo-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+  padding: var(--s-3);
+  background: var(--c-surface);
+  border-radius: var(--radius-m);
+  box-shadow: var(--shadow-1);
+}
+
+.photo-card.is-off {
+  opacity: 0.6;
+}
+
+.photo-card__img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border-radius: var(--radius-s);
+  background: var(--c-sky);
+}
+
+.photo-card__note {
+  font-size: 0.8rem;
+}
+
+.photo-card .input {
+  min-height: 2.5rem;
+  font-size: 0.92rem;
+}
+
+.photo-card__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-2);
+}
+
+.photo-card__tools {
+  gap: 0;
+}
+
+.photo-card__tools .icon-btn[disabled] {
+  opacity: 0.3;
+  cursor: not-allowed;
+}

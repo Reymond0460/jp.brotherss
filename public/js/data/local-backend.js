@@ -22,7 +22,7 @@ const nowISO = () => new Date().toISOString();
 /** Carga el estado guardado; si no existe (o es de otro mes) genera datos de ejemplo nuevos. */
 function loadState() {
   const saved = safeStorage.get(STORAGE_KEYS.demoState);
-  if (saved && saved.seedMonth === monthOf(todayISO())) return saved;
+  if (saved && saved.seedMonth === monthOf(todayISO()) && saved.gallery) return saved;
   const fresh = buildSeedState();
   safeStorage.set(STORAGE_KEYS.demoState, fresh);
   return fresh;
@@ -68,6 +68,7 @@ export function createLocalBackend() {
     getSchedule: async () => clone(state.schedule),
     listServices: async () => clone(state.services).sort((a, b) => a.order - b.order),
     listPromos: async () => clone(state.promos),
+    listGallery: async () => clone(state.gallery).sort((a, b) => (a.order ?? 99) - (b.order ?? 99)),
 
     async listSlots(from, to) {
       return clone(Object.values(state.slots).filter((s) => s.date >= from && s.date <= to));
@@ -169,6 +170,21 @@ export function createLocalBackend() {
 
     async deletePromo(id) {
       state.promos = state.promos.filter((p) => p.id !== id);
+      persist();
+    },
+
+    async saveGalleryItem(item) {
+      const id = item.id || newId('foto');
+      const index = state.gallery.findIndex((g) => g.id === id);
+      const next = { active: true, ...(index >= 0 ? state.gallery[index] : {}), ...clone(item), id };
+      if (index >= 0) state.gallery[index] = next;
+      else state.gallery.push(next);
+      persist();
+      return id;
+    },
+
+    async deleteGalleryItem(id) {
+      state.gallery = state.gallery.filter((g) => g.id !== id);
       persist();
     },
 

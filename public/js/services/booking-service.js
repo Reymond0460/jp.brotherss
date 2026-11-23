@@ -10,16 +10,19 @@ import { STATUS } from '../domain/booking-status.js';
 
 /** Carga de una vez todo lo que el sitio necesita para pintarse. */
 export async function loadCatalog(repo, { includeInactive = false } = {}) {
-  const [business, schedule, services, promos] = await Promise.all([
+  const [business, schedule, services, promos, gallery] = await Promise.all([
     repo.getBusiness(),
     repo.getSchedule(),
     repo.listServices(),
     repo.listPromos(),
+    // La galería es opcional: si falla, el resto del sitio funciona igual.
+    repo.listGallery().catch(() => []),
   ]);
   return {
     business,
     schedule,
     promos,
+    gallery,
     services: includeInactive ? services : services.filter((s) => s.active !== false),
   };
 }

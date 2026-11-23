@@ -9,6 +9,7 @@ import { toast } from '../ui/toast.js';
 import { createRouter } from './router.js';
 import { renderAgenda } from './views/agenda.js';
 import { renderDashboard } from './views/dashboard.js';
+import { renderGallery } from './views/gallery.js';
 import { renderPromos } from './views/promos.js';
 import { renderSchedule } from './views/schedule.js';
 import { renderServices } from './views/services.js';
@@ -21,6 +22,7 @@ const SECTIONS = [
   { id: 'horarios', label: 'Horarios', icon: 'clock', render: renderSchedule },
   { id: 'servicios', label: 'Servicios', icon: 'scissors', render: renderServices },
   { id: 'promos', label: 'Promos', icon: 'tag', render: renderPromos },
+  { id: 'galeria', label: 'Galería', icon: 'image', render: renderGallery },
   { id: 'ajustes', label: 'Ajustes', icon: 'sliders', render: renderSettings },
 ];
 

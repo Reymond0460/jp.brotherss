@@ -138,6 +138,12 @@ service cloud.firestore {
         allow write: if knownEnv(env) && isAdmin();
       }
 
+      // Fotos del carrusel "Nuestro trabajo": públicas para leer, solo el administrador las sube.
+      match /gallery/{id} {
+        allow read: if knownEnv(env);
+        allow write: if knownEnv(env) && isAdmin();
+      }
+
       // Horas ocupadas: solo fecha, hora y tipo. Sin datos personales.
       match /slots/{key} {
         allow read: if knownEnv(env);

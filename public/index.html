@@ -48,6 +48,7 @@
         </button>
 
         <nav class="site-nav" id="site-nav" aria-label="Principal">
+          <a href="#trabajos" data-nav="trabajos">Trabajos</a>
           <a href="#servicios">Servicios</a>
           <a href="#promos" data-nav="promos">Promos</a>
           <a href="#mi-reserva">Mi reserva</a>
@@ -85,6 +86,17 @@
             <img class="hero__logo" src="assets/logo-jp-768.webp" width="432" height="432" alt="JP Brothers: los dos barberos entre postes de barbería" />
             <div id="hero-ticket" aria-live="polite"></div>
           </div>
+        </div>
+      </section>
+
+      <!-- ============ Nuestro trabajo (carrusel; se oculta si no hay fotos) ============ -->
+      <section class="section" id="trabajos" hidden>
+        <div class="container">
+          <header class="section-head">
+            <p class="eyebrow"><span data-icon="image" data-size="16"></span>Cortes reales, de clientes reales</p>
+            <h2>Nuestro trabajo</h2>
+          </header>
+          <div id="gallery-root"></div>
         </div>
       </section>
 

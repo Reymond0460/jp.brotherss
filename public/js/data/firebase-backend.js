@@ -86,6 +86,11 @@ export function createFirebaseBackend({ config, namespace }) {
       return snap.docs.map((d) => ({ id: d.id, ...d.data() }));
     },
 
+    async listGallery() {
+      const snap = await fb.getDocs(col('gallery'));
+      return snap.docs.map((d) => ({ id: d.id, ...d.data() })).sort((a, b) => (a.order ?? 99) - (b.order ?? 99));
+    },
+
     async listSlots(from, to) {
       const q = fb.query(col('slots'), fb.where('date', '>=', from), fb.where('date', '<=', to));
       const snap = await fb.getDocs(q);
@@ -205,6 +210,17 @@ export function createFirebaseBackend({ config, namespace }) {
 
     async deletePromo(id) {
       await fb.deleteDoc(ref('promos', id));
+    },
+
+    async saveGalleryItem(item) {
+      const id = item.id || newId('foto');
+      const { id: _omit, ...data } = item;
+      await fb.setDoc(ref('gallery', id), stripUndefined(data), { merge: true });
+      return id;
+    },
+
+    async deleteGalleryItem(id) {
+      await fb.deleteDoc(ref('gallery', id));
     },
 
     /* ---------- Sesión ---------- */

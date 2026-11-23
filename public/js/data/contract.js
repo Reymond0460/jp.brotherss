@@ -49,6 +49,13 @@
  * @property {string} validUntil        "YYYY-MM-DD" o ""
  * @property {boolean} active
  *
+ * @typedef {Object} GalleryItem
+ * @property {string} id
+ * @property {string} src               imagen ya reducida, como data URL (se guarda en el mismo documento)
+ * @property {string} caption
+ * @property {number} order
+ * @property {boolean} active
+ *
  * @typedef {Object} Booking
  * @property {string} id                código de reserva (8 caracteres)
  * @property {string} serviceId
@@ -86,6 +93,7 @@
  * @property {() => Promise<Schedule>} getSchedule
  * @property {() => Promise<Service[]>} listServices
  * @property {() => Promise<Promo[]>} listPromos
+ * @property {() => Promise<GalleryItem[]>} listGallery                     fotos de trabajos para el carrusel
  * @property {(from:string, to:string) => Promise<Slot[]>} listSlots        bloques ocupados (sin datos personales)
  * @property {(id:string) => Promise<Booking|null>} getBooking              solo quien conoce el código
  *
@@ -105,6 +113,8 @@
  * @property {(id:string) => Promise<void>} deleteService
  * @property {(promo:Partial<Promo>) => Promise<string>} savePromo          devuelve el id
  * @property {(id:string) => Promise<void>} deletePromo
+ * @property {(item:Partial<GalleryItem>) => Promise<string>} saveGalleryItem   devuelve el id
+ * @property {(id:string) => Promise<void>} deleteGalleryItem
  *
  * // --- Sesión del administrador ---
  * @property {(email:string, password:string) => Promise<AdminUser>} signIn

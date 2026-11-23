@@ -29,6 +29,24 @@ function createRandom(seed) {
   };
 }
 
+/**
+ * Fotos de EJEMPLO para el carrusel de la demo (tarjetas ilustradas, no son trabajos reales).
+ * El barbero sube sus fotos reales desde el panel → Galería.
+ */
+function buildPlaceholderGallery() {
+  const slides = [
+    { caption: 'Degradé limpio', tint: '#d8e7f3', ink: '#2a5dc4' },
+    { caption: 'Corte y barba', tint: '#fbe3e0', ink: '#d8443a' },
+    { caption: 'Perfilado de barba', tint: '#fdf0c8', ink: '#9a7200' },
+    { caption: 'Corte clásico', tint: '#dcf2e7', ink: '#1b7f53' },
+    { caption: 'Diseño a navaja', tint: '#dce7fa', ink: '#1e479c' },
+  ];
+  return slides.map((s, index) => {
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500"><rect width="400" height="500" fill="${s.tint}"/><g fill="none" stroke="${s.ink}" stroke-width="10" stroke-linecap="round" transform="translate(120 150)"><circle cx="30" cy="30" r="26"/><circle cx="30" cy="150" r="26"/><path d="M50 48 L150 150M50 132 L150 30"/></g><text x="200" y="410" text-anchor="middle" font-family="sans-serif" font-size="20" fill="${s.ink}" opacity="0.75">Foto de ejemplo</text></svg>`;
+    return { id: `ejemplo-${index + 1}`, src: `data:image/svg+xml,${encodeURIComponent(svg)}`, caption: s.caption, order: index + 1, active: true };
+  });
+}
+
 /** Estado inicial completo de la demo. */
 export function buildSeedState(now = new Date()) {
   const today = todayISO(now);
@@ -122,6 +140,7 @@ export function buildSeedState(now = new Date()) {
     schedule,
     services,
     promos,
+    gallery: buildPlaceholderGallery(),
     bookings,
     slots,
   };
