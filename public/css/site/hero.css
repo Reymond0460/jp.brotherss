@@ -68,6 +68,20 @@
   color: inherit;
 }
 
+/* Logo oficial junto al estado abierto/cerrado */
+.hero__brand {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s-4);
+}
+
+.hero__logo {
+  border-radius: 22px;
+  box-shadow: 0 0 0 3px var(--c-surface), var(--shadow-2);
+  transform: rotate(-3deg);
+}
+
 /* Estado abierto/cerrado */
 .status-chip {
   display: inline-flex;
