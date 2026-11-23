@@ -47,6 +47,15 @@
           ]
         },
         {
+          "source": "{/,**/}",
+          "headers": [
+            {
+              "key": "Cache-Control",
+              "value": "no-cache"
+            }
+          ]
+        },
+        {
           "source": "**/*.@(html|js|css)",
           "headers": [
             {
@@ -154,6 +163,15 @@
             {
               "key": "X-Robots-Tag",
               "value": "noindex, nofollow"
+            }
+          ]
+        },
+        {
+          "source": "{/,**/}",
+          "headers": [
+            {
+              "key": "Cache-Control",
+              "value": "no-cache"
             }
           ]
         },
