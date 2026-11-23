@@ -5,6 +5,7 @@ import { ENV } from '../../config/env.js';
 import { el, replaceContent } from '../../core/dom.js';
 import { formatPhone } from '../../core/format.js';
 import { validateBusiness } from '../../domain/validators.js';
+import { seedDefaults } from '../../services/seed-service.js';
 import { confirmDialog } from '../../ui/dialog.js';
 import { field, input, showFieldErrors } from '../../ui/form.js';
 import { toast } from '../../ui/toast.js';
@@ -98,12 +99,48 @@ export async function renderSettings(host, ctx) {
       )
     : null;
 
+  /* ----- Primera vez: cargar servicios y horarios de ejemplo ----- */
+  const seedBox = ctx.catalog.services.length
+    ? null
+    : el(
+        'section',
+        { class: 'panel stack' },
+        el('h2', { class: 'h3' }, 'Datos iniciales'),
+        el('p', { class: 'muted' }, 'Aún no hay servicios. Carga los de ejemplo (servicios, promos y horario) y luego edítalos a tu gusto.'),
+        el(
+          'div',
+          { class: 'row' },
+          el(
+            'button',
+            {
+              class: 'btn btn--primary',
+              type: 'button',
+              onclick: async (event) => {
+                event.currentTarget.disabled = true;
+                try {
+                  await seedDefaults(ctx.repo);
+                  await ctx.refresh();
+                  toast('Datos iniciales cargados');
+                  renderSettings(host, ctx);
+                } catch (error) {
+                  console.error(error);
+                  toast('No se pudieron cargar los datos iniciales.', 'error');
+                  event.currentTarget.disabled = false;
+                }
+              },
+            },
+            'Cargar datos de ejemplo',
+          ),
+        ),
+      );
+
   replaceContent(
     host,
     pageHeader('Ajustes', `Entorno: ${ENV.name}`),
     el(
       'div',
       { class: 'stack stack--lg' },
+      seedBox,
       el('section', { class: 'panel stack' }, el('h2', { class: 'h3' }, 'Datos del negocio'), businessForm),
       el('section', { class: 'panel stack' }, el('h2', { class: 'h3' }, 'Mi cuenta'), el('p', { class: 'muted' }, `Sesión iniciada como ${ctx.user.email}`), passwordForm),
       demoBox,

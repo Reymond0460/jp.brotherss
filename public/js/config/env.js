@@ -13,8 +13,8 @@
  */
 
 export const HOSTS = {
-  prod: ['jpbrothers-cl.web.app', 'jpbrothers-cl.firebaseapp.com'],
-  qa: ['jpbrothers-qa.web.app', 'jpbrothers-qa.firebaseapp.com'],
+  prod: ['jp-brotherss.web.app', 'jp-brotherss.firebaseapp.com'],
+  qa: ['jp-brotherss-qa.web.app', 'jp-brotherss-qa.firebaseapp.com'],
 };
 
 const LOCAL_HOSTS = ['localhost', '127.0.0.1', '[::1]'];

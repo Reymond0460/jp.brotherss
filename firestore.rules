@@ -44,12 +44,12 @@ service cloud.firestore {
     // El precio de la reserva debe ser el del servicio o el de una promo de ese servicio.
     // Evita que alguien cree reservas con precio 0 para alterar las estadísticas.
     function priceIsValid(env, d) {
-      let service = get(servicePath(env, d.serviceId)).data;
+      let svc = get(servicePath(env, d.serviceId)).data;
       return d.price is number
-        && d.serviceName == service.name
-        && d.durationMin == service.durationMin
+        && d.serviceName == svc.name
+        && d.durationMin == svc.durationMin
         && (
-          d.price == service.price
+          d.price == svc.price
           || (
             d.promoId != ''
             && get(promoPath(env, d.promoId)).data.serviceId == d.serviceId

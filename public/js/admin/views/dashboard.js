@@ -63,6 +63,7 @@ export async function renderDashboard(host, ctx) {
     replaceContent(
       host,
       pageHeader('Resumen', 'Cómo va el negocio', monthNav),
+      ctx.catalog.services.length ? null : el('p', { class: 'notice' }, icon('info', { size: 18 }), el('span', {}, 'Aún no hay servicios cargados. Ve a ', el('a', { href: '#ajustes' }, 'Ajustes'), ' y pulsa "Cargar datos de ejemplo".')),
       kpis,
       el('div', { class: 'dash-grid' }, card('Agenda de hoy', capitalize(formatLongDate(today)), todayList, { wide: false }), card('Ingresos por día', `${formatMonth(state.month)} · solo atenciones cobradas`, dailyHost, { wide: true })),
       el('div', { class: 'dash-grid dash-grid--two' }, card('Cortes por servicio', 'Ordenados por ingreso', serviceHost), card('Cortes por día de la semana', 'Qué días trabajas más', weekdayHost)),

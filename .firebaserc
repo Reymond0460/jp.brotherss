@@ -1,0 +1,11 @@
+{
+  "projects": { "default": "jp-brotherss" },
+  "targets": {
+    "jp-brotherss": {
+      "hosting": {
+        "prod": ["jp-brotherss"],
+        "qa": ["jp-brotherss-qa"]
+      }
+    }
+  }
+}
