@@ -1,0 +1,139 @@
+/* Servicios: pizarra de precios con puntos guía (nombre ........ precio). */
+.menu-board {
+  display: flex;
+  flex-direction: column;
+  max-width: 52rem;
+  background: var(--c-surface);
+  border-radius: var(--radius-l);
+  box-shadow: var(--shadow-1);
+  overflow: hidden;
+}
+
+.menu-row + .menu-row {
+  border-top: 1px solid var(--c-line);
+}
+
+.menu-row__button {
+  display: grid;
+  grid-template-columns: minmax(0, auto) minmax(1rem, 1fr) auto auto auto;
+  align-items: center;
+  gap: var(--s-3);
+  width: 100%;
+  padding: var(--s-4) var(--s-5);
+  border: 0;
+  background: none;
+  text-align: left;
+  transition: background-color 0.15s ease;
+}
+
+.menu-row__button:hover {
+  background: var(--c-bg-soft);
+}
+
+.menu-row__main {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-width: 0;
+}
+
+.menu-row__name {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s-2);
+  font-family: var(--f-display);
+  font-size: 1.45rem;
+  font-weight: 700;
+  font-stretch: 85%;
+  line-height: 1.1;
+}
+
+.menu-row__desc {
+  font-size: 0.92rem;
+  color: var(--c-ink-soft);
+}
+
+/* Puntos guía */
+.menu-row__leader {
+  align-self: end;
+  height: 1.05rem;
+  border-bottom: 3px dotted var(--c-sky-strong);
+}
+
+.menu-row__meta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.85rem;
+  color: var(--c-ink-faint);
+  white-space: nowrap;
+}
+
+.menu-row__price {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-end;
+  min-width: 5.2rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.menu-row__price strong {
+  font-family: var(--f-display);
+  font-size: 1.55rem;
+  font-weight: 760;
+  font-stretch: 85%;
+  line-height: 1;
+}
+
+.menu-row__price s {
+  font-size: 0.85rem;
+  color: var(--c-ink-faint);
+}
+
+.menu-row__go {
+  display: grid;
+  place-items: center;
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 50%;
+  background: var(--c-blue-soft);
+  color: var(--c-blue-deep);
+  transition: transform 0.15s ease;
+}
+
+.menu-row__button:hover .menu-row__go {
+  transform: translateX(3px);
+}
+
+@media (max-width: 640px) {
+  .menu-row__button {
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+      'main price'
+      'meta go';
+    row-gap: var(--s-2);
+    padding: var(--s-4);
+  }
+
+  .menu-row__main {
+    grid-area: main;
+  }
+
+  .menu-row__price {
+    grid-area: price;
+  }
+
+  .menu-row__meta {
+    grid-area: meta;
+  }
+
+  .menu-row__go {
+    grid-area: go;
+    justify-self: end;
+  }
+
+  .menu-row__leader {
+    display: none;
+  }
+}

@@ -1,0 +1,62 @@
+/*
+ * MOTIVO DE BARBERÍA (sutil): poste de barbero, banda de franjas y peine.
+ * Son los únicos adornos temáticos del sitio y se usan con moderación.
+ */
+
+/* Banda horizontal fina de franjas diagonales. */
+.pole-band {
+  height: 6px;
+  background: var(--pole-stripes);
+  background-size: 51px 51px;
+}
+
+/* Poste vertical con cápsula, franjas que giran lentamente. */
+.pole {
+  position: relative;
+  width: 2.1rem;
+  height: 100%;
+  min-height: 10rem;
+  border-radius: 999px;
+  border: 3px solid var(--c-surface);
+  background: var(--pole-stripes);
+  background-size: 51px 51px;
+  box-shadow: 0 0 0 2px var(--c-sky-strong), var(--shadow-1);
+  animation: pole-spin 2.4s linear infinite;
+}
+
+@keyframes pole-spin {
+  to {
+    background-position: 0 51px;
+  }
+}
+
+/* Los extremos del poste (tapas). */
+.pole::before,
+.pole::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  width: 150%;
+  height: 0.7rem;
+  transform: translateX(-50%);
+  border-radius: 999px;
+  background: var(--c-surface);
+  box-shadow: 0 0 0 2px var(--c-sky-strong);
+}
+
+.pole::before {
+  top: -0.55rem;
+}
+
+.pole::after {
+  bottom: -0.55rem;
+}
+
+/* Divisor "peine": dientes finos, para separar secciones sin líneas pesadas. */
+.comb {
+  height: 14px;
+  background:
+    repeating-linear-gradient(90deg, var(--c-sky-strong) 0 2px, transparent 2px 9px) bottom / 100% 10px no-repeat,
+    linear-gradient(var(--c-sky-strong), var(--c-sky-strong)) top / 100% 3px no-repeat;
+  opacity: 0.8;
+}

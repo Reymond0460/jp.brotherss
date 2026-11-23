@@ -1,0 +1,121 @@
+/* Agenda: navegación por día y filas de reserva. */
+.agenda-bar {
+  gap: var(--s-3);
+}
+
+.agenda-nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s-2);
+}
+
+.agenda-nav .input {
+  width: auto;
+  min-height: 2.6rem;
+}
+
+.agenda-summary {
+  color: var(--c-ink-soft);
+}
+
+.appt-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+}
+
+.appt {
+  display: grid;
+  grid-template-columns: 4.6rem minmax(0, 1fr) auto;
+  gap: var(--s-4);
+  align-items: center;
+  padding: var(--s-4);
+  background: var(--c-surface);
+  border-radius: var(--radius-m);
+  box-shadow: var(--shadow-1);
+  /* Marca de estado en el borde izquierdo (además del texto de la píldora). */
+  border-left: 5px solid var(--c-line);
+}
+
+.appt--pending {
+  border-left-color: var(--c-sun);
+}
+
+.appt--confirmed {
+  border-left-color: var(--c-blue);
+}
+
+.appt--done {
+  border-left-color: var(--c-ok);
+}
+
+.appt--cancelled,
+.appt--noshow {
+  border-left-color: var(--c-red);
+  opacity: 0.72;
+}
+
+.appt__time {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.appt__time strong {
+  font-size: 1.5rem;
+}
+
+.appt__time small {
+  color: var(--c-ink-faint);
+  font-size: 0.78rem;
+}
+
+.appt__body {
+  min-width: 0;
+}
+
+.appt__name {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s-2);
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.appt__meta {
+  color: var(--c-ink-soft);
+  font-size: 0.92rem;
+}
+
+.appt__notes {
+  margin-top: 0.2rem;
+  font-style: italic;
+  font-size: 0.92rem;
+}
+
+.appt__actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--s-2);
+}
+
+.appt__tools {
+  gap: 0;
+}
+
+@media (max-width: 760px) {
+  .appt {
+    grid-template-columns: 4rem minmax(0, 1fr);
+  }
+
+  .appt__actions {
+    grid-column: 1 / -1;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+  }
+}

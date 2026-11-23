@@ -1,0 +1,120 @@
+/* Botones. Variantes: primary, whatsapp, soft, ghost, danger. Tamaños: sm, block. */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s-2);
+  min-height: 3rem;
+  padding: 0.7rem 1.3rem;
+  border: 2px solid transparent;
+  border-radius: 10px;
+  font-weight: 650;
+  font-size: 1rem;
+  line-height: 1.1;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: transform 0.12s ease, background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.btn:active:not([disabled]) {
+  transform: translateY(1px);
+}
+
+.btn[disabled],
+.btn[aria-disabled='true'] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn--primary {
+  background: var(--c-blue);
+  color: #fff;
+  box-shadow: 0 2px 0 var(--c-blue-deep);
+}
+
+.btn--primary:hover:not([disabled]) {
+  background: var(--c-blue-deep);
+}
+
+.btn--whatsapp {
+  background: var(--c-whatsapp);
+  color: #fff;
+  box-shadow: 0 2px 0 var(--c-whatsapp-deep);
+}
+
+.btn--whatsapp:hover:not([disabled]) {
+  background: var(--c-whatsapp-deep);
+}
+
+.btn--soft {
+  background: var(--c-sky);
+  color: var(--c-ink);
+}
+
+.btn--soft:hover:not([disabled]) {
+  background: var(--c-sky-strong);
+}
+
+.btn--ghost {
+  background: transparent;
+  border-color: var(--c-line);
+  color: var(--c-ink);
+}
+
+.btn--ghost:hover:not([disabled]) {
+  border-color: var(--c-ink-faint);
+  background: var(--c-surface);
+}
+
+.btn--danger {
+  background: var(--c-red-deep);
+  color: #fff;
+}
+
+.btn--danger:hover:not([disabled]) {
+  background: #9a261f;
+}
+
+.btn--sm {
+  min-height: 2.4rem;
+  padding: 0.45rem 0.85rem;
+  font-size: 0.92rem;
+  border-radius: 8px;
+}
+
+.btn--block {
+  width: 100%;
+}
+
+/* Botón de solo icono (acciones en tablas y tarjetas). */
+.icon-btn {
+  display: inline-grid;
+  place-items: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  padding: 0;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--c-ink-soft);
+}
+
+.icon-btn:hover {
+  background: var(--c-sky);
+  color: var(--c-ink);
+}
+
+.icon-btn--danger:hover {
+  background: var(--c-red-soft);
+  color: var(--c-red-deep);
+}
+
+.link-btn {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--c-blue-deep);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}

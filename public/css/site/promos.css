@@ -1,0 +1,102 @@
+/* Promos: cupones sobre una banda amarilla suave. */
+.promos {
+  background: var(--c-sun-soft);
+  position: relative;
+}
+
+.promos .eyebrow {
+  color: var(--c-sun-ink);
+}
+
+.coupon-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
+  gap: var(--s-5);
+}
+
+.coupon {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+  padding: var(--s-5);
+  background: var(--c-surface);
+  border-radius: var(--radius-m);
+  /* Borde interior punteado, como un cupón recortable. */
+  outline: 2px dashed var(--c-sun);
+  outline-offset: -9px;
+  box-shadow: var(--shadow-1);
+}
+
+.coupon:nth-child(odd) {
+  transform: rotate(-0.6deg);
+}
+
+.coupon:nth-child(even) {
+  transform: rotate(0.5deg);
+}
+
+.coupon__badge {
+  align-self: flex-start;
+  padding: 0.2rem 0.7rem;
+  background: var(--c-red);
+  color: #fff;
+  font-family: var(--f-mono);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  border-radius: 6px;
+}
+
+.coupon__title {
+  margin-top: var(--s-2);
+}
+
+.coupon__text {
+  color: var(--c-ink-soft);
+}
+
+.coupon__price {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--s-2) var(--s-3);
+  margin-top: var(--s-2);
+}
+
+.coupon__price s {
+  color: var(--c-ink-faint);
+}
+
+.coupon__price strong {
+  font-family: var(--f-display);
+  font-size: 2.2rem;
+  font-weight: 760;
+  font-stretch: 82%;
+  line-height: 1;
+}
+
+.coupon__price span {
+  font-size: 0.9rem;
+  color: var(--c-ink-soft);
+}
+
+.coupon__valid {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  font-size: 0.85rem;
+  color: var(--c-ink-soft);
+}
+
+.coupon__action {
+  margin-top: auto;
+  padding-top: var(--s-3);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .coupon:nth-child(odd),
+  .coupon:nth-child(even) {
+    transform: none;
+  }
+}

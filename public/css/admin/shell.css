@@ -1,0 +1,190 @@
+/* Estructura del panel: login, menú lateral (escritorio) y barra inferior (móvil). */
+
+/* ---------- Login ---------- */
+.login-loading {
+  padding: var(--s-7);
+  text-align: center;
+}
+
+.login {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background:
+    repeating-linear-gradient(-45deg, rgb(42 93 196 / 5%) 0 22px, transparent 22px 44px),
+    var(--c-bg);
+}
+
+.login__card {
+  width: min(94vw, 26rem);
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-4);
+  padding: var(--s-6);
+  background: var(--c-surface);
+  border-radius: var(--radius-l);
+  box-shadow: var(--shadow-2);
+}
+
+.login__title {
+  font-size: 2.6rem;
+}
+
+/* ---------- Estructura ---------- */
+.admin-shell {
+  display: grid;
+  grid-template-columns: 15.5rem minmax(0, 1fr);
+  min-height: 100vh;
+}
+
+.admin-nav {
+  position: sticky;
+  top: 0;
+  align-self: start; /* sin esto, el menú ocupa toda la altura de la fila y no se queda fijo al hacer scroll */
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-5);
+  padding: var(--s-5) var(--s-4);
+  background: var(--c-surface);
+  border-right: 1px solid var(--c-line);
+}
+
+.admin-nav__links {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-1);
+}
+
+.admin-nav__link {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  padding: 0.7rem 0.85rem;
+  border-radius: 10px;
+  color: var(--c-ink-soft);
+  font-weight: 650;
+  text-decoration: none;
+}
+
+.admin-nav__link:hover {
+  background: var(--c-bg);
+  color: var(--c-ink);
+}
+
+.admin-nav__link[aria-current] {
+  background: var(--c-blue-soft);
+  color: var(--c-blue-deep);
+}
+
+.admin-nav__foot {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--s-2);
+  font-size: 0.9rem;
+}
+
+.admin-nav__user {
+  color: var(--c-ink-soft);
+  overflow-wrap: anywhere;
+}
+
+.env-badge {
+  padding: 0.15rem 0.6rem;
+  border-radius: 999px;
+  background: var(--c-sky);
+  font-family: var(--f-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.env-badge--prod {
+  background: var(--c-ok-soft);
+  color: var(--c-ok);
+}
+
+.env-badge--qa,
+.env-badge--demo {
+  background: var(--c-sun-soft);
+  color: var(--c-sun-ink);
+}
+
+.admin-main {
+  min-width: 0;
+  padding: var(--s-6) clamp(var(--s-4), 3vw, var(--s-7)) var(--s-8);
+}
+
+.view {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-5);
+  max-width: 76rem;
+}
+
+.view-loading {
+  padding: var(--s-6);
+}
+
+.page-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--s-4);
+}
+
+.page-header__title {
+  font-size: clamp(2.2rem, 5vw, 3.2rem);
+}
+
+.stack--lg {
+  gap: var(--s-5);
+}
+
+/* ---------- Móvil: barra inferior ---------- */
+@media (max-width: 860px) {
+  .admin-shell {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .admin-nav {
+    position: fixed;
+    inset: auto 0 0 0;
+    z-index: 45;
+    height: auto;
+    flex-direction: row;
+    gap: 0;
+    padding: 0 env(safe-area-inset-right, 0px) env(safe-area-inset-bottom, 0px) env(safe-area-inset-left, 0px);
+    border-right: 0;
+    border-top: 1px solid var(--c-line);
+    box-shadow: 0 -6px 20px rgb(19 35 59 / 8%);
+  }
+
+  .admin-nav__brand,
+  .admin-nav__foot {
+    display: none;
+  }
+
+  .admin-nav__links {
+    flex: 1;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+
+  .admin-nav__link {
+    flex: 1;
+    flex-direction: column;
+    gap: 0.15rem;
+    padding: 0.55rem 0.2rem;
+    font-size: 0.7rem;
+    border-radius: 0;
+  }
+
+  .admin-main {
+    padding-bottom: 6rem;
+  }
+}

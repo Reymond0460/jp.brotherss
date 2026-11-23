@@ -1,0 +1,153 @@
+/* Formularios: campos, interruptores y chips seleccionables. */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  min-width: 0;
+}
+
+.field__label {
+  font-size: 0.9rem;
+  font-weight: 650;
+}
+
+.field__hint {
+  font-size: 0.85rem;
+  color: var(--c-ink-soft);
+}
+
+.field__error {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--c-red-deep);
+}
+
+.input,
+.select,
+.textarea {
+  width: 100%;
+  min-height: 3rem;
+  padding: 0.65rem 0.9rem;
+  background: var(--c-surface);
+  border: 2px solid var(--c-line);
+  border-radius: 10px;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.textarea {
+  min-height: 5.5rem;
+  resize: vertical;
+}
+
+.input:hover,
+.select:hover,
+.textarea:hover {
+  border-color: var(--c-ink-faint);
+}
+
+.input:focus,
+.select:focus,
+.textarea:focus {
+  outline: none;
+  border-color: var(--c-blue);
+  box-shadow: 0 0 0 4px var(--c-blue-soft);
+}
+
+.field--invalid .input,
+.field--invalid .select,
+.field--invalid .textarea {
+  border-color: var(--c-red);
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
+  gap: var(--s-4);
+}
+
+/* Interruptor (sí/no) accesible: es un checkbox real con otra apariencia. */
+.switch {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-3);
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.switch input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.switch__track {
+  position: relative;
+  flex: none;
+  width: 2.8rem;
+  height: 1.6rem;
+  background: var(--c-sky-strong);
+  border-radius: 999px;
+  transition: background-color 0.15s ease;
+}
+
+.switch__track::after {
+  content: '';
+  position: absolute;
+  top: 0.2rem;
+  left: 0.2rem;
+  width: 1.2rem;
+  height: 1.2rem;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 25%);
+  transition: transform 0.15s ease;
+}
+
+.switch input:checked + .switch__track {
+  background: var(--c-blue);
+}
+
+.switch input:checked + .switch__track::after {
+  transform: translateX(1.2rem);
+}
+
+.switch input:focus-visible + .switch__track {
+  outline: 3px solid var(--c-blue);
+  outline-offset: 2px;
+}
+
+/* Chip seleccionable (radio/checkbox con apariencia de botón). */
+.chip {
+  position: relative;
+  display: inline-flex;
+}
+
+.chip input {
+  position: absolute;
+  opacity: 0;
+  inset: 0;
+  cursor: pointer;
+}
+
+.chip span {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  padding: 0.45rem 0.9rem;
+  border: 2px solid var(--c-line);
+  border-radius: 999px;
+  background: var(--c-surface);
+  font-weight: 600;
+  font-size: 0.92rem;
+}
+
+.chip input:checked + span {
+  background: var(--c-ink);
+  border-color: var(--c-ink);
+  color: #fff;
+}
+
+.chip input:focus-visible + span {
+  outline: 3px solid var(--c-blue);
+  outline-offset: 2px;
+}

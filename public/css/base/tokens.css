@@ -1,0 +1,73 @@
+/*
+ * TOKENS DE DISEÑO — única fuente de colores, tipografías, espacios y sombras.
+ * Para cambiar la identidad del sitio (ej. el color de marca) se edita SOLO este archivo.
+ *
+ * Concepto visual: "turno de barbería". Fondos claros azulados, el rojo y el azul del
+ * poste de barbero como únicos acentos, y el "ticket de turno" como elemento de marca.
+ */
+:root {
+  /* ---------- Color: superficies ---------- */
+  --c-bg: #edf3f8;          /* fondo general: azul-gris muy claro */
+  --c-bg-soft: #f6f9fc;
+  --c-surface: #ffffff;
+  --c-sky: #d8e7f3;         /* bandas y fondos secundarios */
+  --c-sky-strong: #bcd5e8;
+  --c-line: #d0dce7;        /* bordes y separadores */
+
+  /* ---------- Color: texto ---------- */
+  --c-ink: #13233b;         /* azul tinta, en vez de negro puro */
+  --c-ink-soft: #46586f;
+  --c-ink-faint: #64768d;
+
+  /* ---------- Color: marca (poste de barbero) ---------- */
+  --c-blue: #2a5dc4;
+  --c-blue-deep: #1e479c;
+  --c-blue-soft: #dce7fa;
+  --c-red: #d8443a;
+  --c-red-deep: #b93128;
+  --c-red-soft: #fbe3e0;
+  --c-sun: #f4c74b;         /* solo para promos */
+  --c-sun-soft: #fdf0c8;
+  --c-sun-ink: #6b4f00;
+
+  /* ---------- Color: estados ---------- */
+  --c-ok: #1b7f53;
+  --c-ok-soft: #dcf2e7;
+  --c-whatsapp: #15803d;
+  --c-whatsapp-deep: #116530;
+
+  /* ---------- Tipografía ---------- */
+  --f-display: 'Bricolage Grotesque', 'Arial Narrow', system-ui, sans-serif;
+  --f-body: 'Instrument Sans', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --f-mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Consolas, monospace;
+
+  /* ---------- Espacios ---------- */
+  --s-1: 0.25rem;
+  --s-2: 0.5rem;
+  --s-3: 0.75rem;
+  --s-4: 1rem;
+  --s-5: 1.5rem;
+  --s-6: 2rem;
+  --s-7: 3rem;
+  --s-8: 4.5rem;
+  --s-9: 6.5rem;
+
+  /* ---------- Forma ---------- */
+  --radius-s: 6px;
+  --radius-m: 12px;
+  --radius-l: 20px;
+  --shadow-1: 0 1px 2px rgb(19 35 59 / 6%), 0 4px 14px rgb(19 35 59 / 6%);
+  --shadow-2: 0 2px 4px rgb(19 35 59 / 6%), 0 16px 36px rgb(19 35 59 / 13%);
+  --container: 1120px;
+
+  /* ---------- Poste de barbero (franjas diagonales) ---------- */
+  --pole-stripes: repeating-linear-gradient(
+    -45deg,
+    var(--c-red) 0 9px,
+    #fff 9px 18px,
+    var(--c-blue) 18px 27px,
+    #fff 27px 36px
+  );
+
+  color-scheme: light;
+}

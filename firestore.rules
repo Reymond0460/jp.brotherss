@@ -1,0 +1,164 @@
+rules_version = '2';
+
+// =============================================================================
+// REGLAS DE SEGURIDAD DE FIRESTORE — JP Brothers
+//
+// Estructura:  admins/{uid}                  quién es administrador
+//              envs/{prod|qa}/...            datos del sitio (producción y QA separados)
+//
+// Resumen de permisos:
+//   - Cualquiera puede LEER el catálogo (servicios, promos, horarios) y las horas ocupadas.
+//   - Cualquiera puede CREAR una reserva (con datos validados) y CANCELAR la suya.
+//   - Una reserva solo se puede LEER sabiendo su código (no se puede listar la colección).
+//   - Todo lo demás (ver todas las reservas, editar precios, horarios, etc.) es solo del administrador.
+//   - Los datos personales de los clientes nunca quedan en documentos públicos:
+//     los bloques ocupados ("slots") solo guardan fecha y hora.
+// =============================================================================
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    /* ---------- Funciones auxiliares ---------- */
+
+    // Administrador = existe el documento admins/{su uid}. Se crea con scripts/create-admin.mjs.
+    function isAdmin() {
+      return request.auth != null
+        && exists(/databases/$(database)/documents/admins/$(request.auth.uid));
+    }
+
+    function knownEnv(env) {
+      return env in ['prod', 'qa'];
+    }
+
+    function bookingPath(env, id) {
+      return /databases/$(database)/documents/envs/$(env)/bookings/$(id);
+    }
+
+    function servicePath(env, id) {
+      return /databases/$(database)/documents/envs/$(env)/services/$(id);
+    }
+
+    function promoPath(env, id) {
+      return /databases/$(database)/documents/envs/$(env)/promos/$(id);
+    }
+
+    // El precio de la reserva debe ser el del servicio o el de una promo de ese servicio.
+    // Evita que alguien cree reservas con precio 0 para alterar las estadísticas.
+    function priceIsValid(env, d) {
+      let service = get(servicePath(env, d.serviceId)).data;
+      return d.price is number
+        && d.serviceName == service.name
+        && d.durationMin == service.durationMin
+        && (
+          d.price == service.price
+          || (
+            d.promoId != ''
+            && get(promoPath(env, d.promoId)).data.serviceId == d.serviceId
+            && d.price == get(promoPath(env, d.promoId)).data.promoPrice
+          )
+        );
+    }
+
+    // Reserva creada por un cliente desde la web.
+    function isValidPublicBooking(env, id) {
+      let d = request.resource.data;
+      return id.matches('^[2-9A-HJKMNP-Z]{8}$')
+        && d.keys().hasOnly(['serviceId', 'serviceName', 'durationMin', 'price', 'promoId', 'promoTitle',
+                             'date', 'time', 'clientName', 'clientPhone', 'notes', 'status', 'source',
+                             'slotKeys', 'createdAt', 'updatedAt'])
+        && d.status == 'pending'
+        && d.source == 'web'
+        && d.createdAt == request.time
+        && d.updatedAt == request.time
+        && d.serviceId is string
+        && d.promoId is string
+        && d.promoTitle is string
+        && d.clientName is string && d.clientName.size() >= 2 && d.clientName.size() <= 60
+        && d.clientPhone is string && d.clientPhone.matches('^569[0-9]{8}$')
+        && d.notes is string && d.notes.size() <= 200
+        && d.date is string && d.date.matches('^20[0-9]{2}-[01][0-9]-[0-3][0-9]$')
+        && d.time is string && d.time.matches('^[0-2][0-9]:[0-5][0-9]$')
+        && d.durationMin is int && d.durationMin >= 10 && d.durationMin <= 240
+        && d.slotKeys is list && d.slotKeys.size() >= 1 && d.slotKeys.size() <= 8
+        && priceIsValid(env, d);
+    }
+
+    // El cliente solo puede cambiar el estado a "cancelled" (y nada más).
+    function isClientCancel() {
+      return request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status', 'updatedAt'])
+        && request.resource.data.status == 'cancelled'
+        && resource.data.status in ['pending', 'confirmed']
+        && request.resource.data.updatedAt == request.time;
+    }
+
+    // Bloque ocupado creado junto con una reserva (en el mismo batch).
+    // Que el id del bloque sea único es lo que impide reservar dos veces la misma hora.
+    function isValidPublicSlot(env, key) {
+      let d = request.resource.data;
+      let booking = getAfter(bookingPath(env, d.bookingId)).data;
+      return d.keys().hasOnly(['date', 'time', 'kind', 'bookingId'])
+        && d.kind == 'booking'
+        && d.date is string && d.time is string
+        && key == d.date + '_' + d.time.replace(':', '')
+        && d.bookingId is string && d.bookingId.size() == 8
+        && booking.date == d.date
+        && key in booking.slotKeys;
+    }
+
+    // Un bloque se puede liberar si su reserva queda cancelada en el mismo batch.
+    function isReleasedByCancellation(env) {
+      return resource.data.kind == 'booking'
+        && getAfter(bookingPath(env, resource.data.bookingId)).data.status == 'cancelled';
+    }
+
+    /* ---------- Administradores ---------- */
+
+    match /admins/{uid} {
+      // Cada cuenta solo puede comprobar si ella misma es administradora.
+      allow get: if request.auth != null && request.auth.uid == uid;
+      allow list, write: if false;
+    }
+
+    /* ---------- Datos del sitio por entorno ---------- */
+
+    match /envs/{env} {
+
+      // Negocio y horarios: públicos para leer, solo el administrador escribe.
+      match /settings/{docId} {
+        allow read: if knownEnv(env);
+        allow write: if knownEnv(env) && isAdmin();
+      }
+
+      match /services/{id} {
+        allow read: if knownEnv(env);
+        allow write: if knownEnv(env) && isAdmin();
+      }
+
+      match /promos/{id} {
+        allow read: if knownEnv(env);
+        allow write: if knownEnv(env) && isAdmin();
+      }
+
+      // Horas ocupadas: solo fecha, hora y tipo. Sin datos personales.
+      match /slots/{key} {
+        allow read: if knownEnv(env);
+        allow create: if knownEnv(env) && (isAdmin() || isValidPublicSlot(env, key));
+        allow update: if knownEnv(env) && isAdmin();
+        allow delete: if knownEnv(env) && (isAdmin() || isReleasedByCancellation(env));
+      }
+
+      // Reservas: se lee una sola si se conoce su código; listar es solo del administrador.
+      match /bookings/{id} {
+        allow get: if knownEnv(env);
+        allow list: if knownEnv(env) && isAdmin();
+        allow create: if knownEnv(env) && (isAdmin() || isValidPublicBooking(env, id));
+        allow update: if knownEnv(env) && (isAdmin() || isClientCancel());
+        allow delete: if knownEnv(env) && isAdmin();
+      }
+    }
+
+    // Todo lo demás está cerrado.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

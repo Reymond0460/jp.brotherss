@@ -1,0 +1,141 @@
+/* Portada: titular grande a la izquierda, ticket con la próxima hora libre a la derecha. */
+.hero {
+  position: relative;
+  padding-block: clamp(var(--s-6), 6vw, var(--s-8)) clamp(var(--s-7), 7vw, var(--s-9));
+  overflow: clip;
+}
+
+/* Franjas diagonales muy tenues detrás del ticket: guiño de poste de barbero, casi imperceptible. */
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: min(46vw, 36rem);
+  height: 100%;
+  background: repeating-linear-gradient(-45deg, rgb(42 93 196 / 6%) 0 22px, transparent 22px 44px);
+  -webkit-mask: linear-gradient(to left, #000 30%, #0000);
+  mask: linear-gradient(to left, #000 30%, #0000);
+  pointer-events: none;
+}
+
+.hero__grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  gap: clamp(var(--s-6), 5vw, var(--s-8));
+  align-items: center;
+}
+
+.hero__copy {
+  gap: var(--s-5);
+}
+
+.h1-mark {
+  position: relative;
+  display: inline-block;
+  color: var(--c-blue);
+}
+
+/* Subrayado en franjas de poste bajo la palabra destacada. */
+.h1-mark::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0.02em;
+  height: 0.12em;
+  background: var(--pole-stripes);
+  background-size: 51px 51px;
+  border-radius: 99px;
+}
+
+.hero__facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2) var(--s-5);
+  color: var(--c-ink-soft);
+  font-size: 0.95rem;
+}
+
+.hero__facts li {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+}
+
+.hero__facts a {
+  color: inherit;
+}
+
+/* Estado abierto/cerrado */
+.status-chip {
+  display: inline-flex;
+  align-self: flex-start;
+  align-items: center;
+  gap: var(--s-2);
+  padding: 0.35rem 0.85rem 0.35rem 0.7rem;
+  background: var(--c-surface);
+  border: 1px solid var(--c-line);
+  border-radius: 999px;
+  font-size: 0.88rem;
+  font-weight: 650;
+}
+
+.status-chip__dot {
+  width: 0.6rem;
+  height: 0.6rem;
+  border-radius: 50%;
+  background: var(--c-ink-faint);
+}
+
+.status-chip.is-open .status-chip__dot {
+  background: var(--c-ok);
+  box-shadow: 0 0 0 4px var(--c-ok-soft);
+}
+
+/* Lado derecho: poste + ticket */
+.hero__art {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: stretch;
+  gap: var(--s-5);
+  padding-block: var(--s-3);
+}
+
+.hero__art .pole {
+  align-self: stretch;
+  margin-block: 0.6rem;
+}
+
+.hero__ticket {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-4);
+  justify-content: center;
+  transform: rotate(1.2deg);
+}
+
+.hero__take {
+  transform: rotate(-1.2deg);
+}
+
+@media (max-width: 900px) {
+  .hero__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .hero__art {
+    max-width: 30rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero__art {
+    gap: var(--s-4);
+  }
+
+  .hero__art .pole {
+    width: 1.5rem;
+  }
+}

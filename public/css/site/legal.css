@@ -1,0 +1,75 @@
+/* Páginas legales (privacidad y cookies): texto largo, cómodo de leer. */
+.legal {
+  max-width: 46rem;
+  padding-block: var(--s-7) var(--s-8);
+}
+
+.legal h1 {
+  font-size: clamp(2.6rem, 7vw, 4rem);
+  margin-bottom: var(--s-3);
+}
+
+.legal h2 {
+  margin-top: var(--s-6);
+  margin-bottom: var(--s-3);
+  font-size: 1.9rem;
+}
+
+.legal p,
+.legal li {
+  margin-bottom: var(--s-3);
+  text-wrap: pretty;
+}
+
+.legal ul {
+  padding-left: 1.2rem;
+  list-style: disc;
+}
+
+.legal__meta {
+  color: var(--c-ink-soft);
+  font-size: 0.95rem;
+}
+
+.legal__back {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  margin-bottom: var(--s-5);
+  font-weight: 650;
+}
+
+.legal-table {
+  width: 100%;
+  margin-block: var(--s-4);
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.legal-table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--c-line);
+  border-radius: var(--radius-m);
+  background: var(--c-surface);
+}
+
+.legal-table th,
+.legal-table td {
+  padding: var(--s-3) var(--s-4);
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--c-line);
+}
+
+.legal-table tr:last-child td {
+  border-bottom: 0;
+}
+
+.legal-table th {
+  background: var(--c-bg-soft);
+  font-size: 0.8rem;
+  font-family: var(--f-mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--c-ink-soft);
+}

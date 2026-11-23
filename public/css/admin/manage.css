@@ -1,0 +1,149 @@
+/* Horarios, servicios y promos: listas de gestión y horario semanal. */
+.item-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+}
+
+.item {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto auto;
+  align-items: center;
+  gap: var(--s-4);
+  padding: var(--s-4) var(--s-5);
+  background: var(--c-surface);
+  border-radius: var(--radius-m);
+  box-shadow: var(--shadow-1);
+}
+
+.item.is-off {
+  opacity: 0.65;
+}
+
+.item__main {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-width: 0;
+}
+
+.item__main strong {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s-2);
+  font-size: 1.1rem;
+}
+
+.item__price {
+  font-family: var(--f-display);
+  font-size: 1.5rem;
+  font-weight: 750;
+  font-stretch: 85%;
+}
+
+@media (max-width: 760px) {
+  .item {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .item__main {
+    grid-column: 1 / -1;
+  }
+}
+
+/* Horario semanal */
+.week {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+}
+
+.week-head,
+.week-row {
+  display: grid;
+  grid-template-columns: 9rem minmax(0, 1fr);
+  gap: var(--s-4);
+  align-items: center;
+}
+
+.week-head {
+  font-family: var(--f-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--c-ink-soft);
+}
+
+@media (max-width: 720px) {
+  .week-head {
+    display: none;
+  }
+}
+
+.week-row {
+  padding: var(--s-3) 0;
+  border-bottom: 1px dashed var(--c-line);
+}
+
+.week-row__times {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--s-3);
+}
+
+.week-row__times.is-off {
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+.week-row__times .input {
+  min-height: 2.6rem;
+  padding-inline: 0.6rem;
+}
+
+@media (max-width: 720px) {
+  .week-row {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--s-2);
+  }
+
+  .week-row__times {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.form-grid--end {
+  align-items: end;
+}
+
+.closed-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.closed-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-3);
+  padding: 0.4rem 0;
+  border-bottom: 1px dashed var(--c-line);
+}
+
+/* Hora bloqueada manualmente */
+.slot.is-blocked {
+  background: var(--c-red-soft);
+  border-color: var(--c-red);
+  color: var(--c-red-deep);
+}
+
+.slot__lock {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.slot-picker {
+  min-height: 3rem;
+}

@@ -1,0 +1,24 @@
+/*
+ * Hoja de estilos del panel de administración.
+ * Reutiliza base y componentes del sitio y agrega solo lo propio del panel.
+ */
+@import 'base/fonts.css';
+@import 'base/tokens.css';
+@import 'base/reset.css';
+@import 'base/typography.css';
+@import 'base/layout.css';
+
+@import 'components/button.css';
+@import 'components/form.css';
+@import 'components/surface.css';
+@import 'components/ticket.css';
+@import 'components/pole.css';
+@import 'components/feedback.css';
+@import 'components/slots.css';
+@import 'components/brand.css';
+
+@import 'admin/shell.css';
+@import 'admin/dashboard.css';
+@import 'admin/charts.css';
+@import 'admin/agenda.css';
+@import 'admin/manage.css';

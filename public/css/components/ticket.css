@@ -1,0 +1,159 @@
+/*
+ * TICKET DE TURNO — elemento de marca.
+ * Una tarjeta con muescas laterales y una línea de corte punteada, como el número de turno
+ * que se saca al entrar a una barbería. Se usa en la portada, en el resumen de la reserva
+ * y en "Mi reserva".
+ *
+ * Estructura:
+ *   .ticket-wrap            (aporta la sombra: la máscara del ticket recortaría una sombra propia)
+ *     .ticket
+ *       .ticket__main       (contenido principal)
+ *       .ticket__stub       (talón con el código)
+ */
+.ticket-wrap {
+  filter: drop-shadow(0 10px 22px rgb(19 35 59 / 14%));
+}
+
+.ticket {
+  --notch: 11px;
+  --stub: 5.6rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: var(--c-surface);
+  border-radius: 16px;
+  /* Dos círculos transparentes recortan las muescas en el borde izquierdo y derecho. */
+  -webkit-mask:
+    radial-gradient(circle var(--notch) at 0 calc(100% - var(--stub)), #0000 97%, #000) 0 0 / 51% 100% no-repeat,
+    radial-gradient(circle var(--notch) at 100% calc(100% - var(--stub)), #0000 97%, #000) 100% 0 / 51% 100% no-repeat;
+  mask:
+    radial-gradient(circle var(--notch) at 0 calc(100% - var(--stub)), #0000 97%, #000) 0 0 / 51% 100% no-repeat,
+    radial-gradient(circle var(--notch) at 100% calc(100% - var(--stub)), #0000 97%, #000) 100% 0 / 51% 100% no-repeat;
+}
+
+/* Franja de poste de barbero en el borde superior. */
+.ticket::before {
+  content: '';
+  height: 8px;
+  background: var(--pole-stripes);
+  background-size: 51px 51px;
+}
+
+.ticket__main {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+  padding: var(--s-5) var(--s-5) var(--s-4);
+  min-height: 11rem;
+}
+
+.ticket__label {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--s-3);
+  font-family: var(--f-mono);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--c-ink-faint);
+}
+
+.ticket__big {
+  font-family: var(--f-display);
+  font-weight: 780;
+  font-stretch: 80%;
+  font-size: clamp(3.4rem, 9vw, 4.6rem);
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+
+.ticket__row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-1) var(--s-4);
+  font-size: 0.95rem;
+}
+
+.ticket__row dt {
+  color: var(--c-ink-faint);
+}
+
+.ticket__row dd {
+  font-weight: 650;
+}
+
+.ticket__list {
+  display: grid;
+  gap: 0.45rem;
+  font-size: 0.95rem;
+}
+
+.ticket__list div {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--s-3);
+}
+
+.ticket__list dt {
+  color: var(--c-ink-faint);
+}
+
+.ticket__list dd {
+  font-weight: 650;
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+
+.ticket__stub {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-3);
+  height: var(--stub);
+  padding: 0 var(--s-5);
+}
+
+/* Línea de corte punteada entre el cuerpo y el talón. */
+.ticket__stub::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: calc(var(--notch) + 6px);
+  right: calc(var(--notch) + 6px);
+  border-top: 2px dashed var(--c-line);
+}
+
+/* Código de barras decorativo hecho con degradados. */
+.barcode {
+  flex: none;
+  width: 5.5rem;
+  height: 2.4rem;
+  background:
+    repeating-linear-gradient(90deg, var(--c-ink) 0 2px, transparent 2px 5px),
+    repeating-linear-gradient(90deg, var(--c-ink) 0 1px, transparent 1px 7px);
+  background-size: 100% 100%, 100% 70%;
+  background-repeat: no-repeat;
+  background-position: 0 0, 0 100%;
+  -webkit-mask: linear-gradient(90deg, #000 0 18%, #0000 18% 22%, #000 22% 55%, #0000 55% 60%, #000 60% 100%);
+  mask: linear-gradient(90deg, #000 0 18%, #0000 18% 22%, #000 22% 55%, #0000 55% 60%, #000 60% 100%);
+  opacity: 0.85;
+}
+
+.ticket__code {
+  font-family: var(--f-mono);
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+}
+
+.ticket__code small {
+  display: block;
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--c-ink-faint);
+}

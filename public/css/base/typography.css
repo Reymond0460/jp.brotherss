@@ -1,0 +1,56 @@
+/* Jerarquía tipográfica. Titulares condensados y pesados, estilo letrero de barbería. */
+
+h1,
+h2,
+h3,
+.display {
+  font-family: var(--f-display);
+  font-weight: 760;
+  font-stretch: 82%;
+  line-height: 1;
+  letter-spacing: -0.012em;
+  text-wrap: balance;
+}
+
+h1,
+.h1 {
+  font-size: clamp(3rem, 8.4vw, 6rem);
+}
+
+h2,
+.h2 {
+  font-size: clamp(2.1rem, 5vw, 3.4rem);
+}
+
+h3,
+.h3 {
+  font-size: 1.5rem;
+  line-height: 1.1;
+}
+
+.lead {
+  font-size: clamp(1.1rem, 2vw, 1.25rem);
+  color: var(--c-ink-soft);
+  max-width: 34rem;
+  text-wrap: pretty;
+}
+
+/* Etiqueta pequeña sobre los títulos: siempre lleva un dato real de la sección. */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  font-family: var(--f-mono);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--c-blue-deep);
+}
+
+.section-head {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+  margin-bottom: var(--s-6);
+}

@@ -1,0 +1,276 @@
+/* Reserva: asistente de 3 pasos + ticket lateral. */
+.booking {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+  gap: clamp(var(--s-5), 4vw, var(--s-7));
+  align-items: start;
+}
+
+.booking__side {
+  position: sticky;
+  top: 6rem;
+}
+
+@media (max-width: 900px) {
+  .booking {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  /* En móvil el ticket va arriba, para ver el resumen mientras se elige. */
+  .booking__side {
+    position: static;
+    order: -1;
+    max-width: 26rem;
+  }
+}
+
+/* ---------- Indicador de pasos ---------- */
+.stepper {
+  display: flex;
+  gap: var(--s-2);
+  margin-bottom: var(--s-5);
+  padding-bottom: var(--s-4);
+  border-bottom: 1px solid var(--c-line);
+  overflow-x: auto;
+}
+
+.stepper__item {
+  flex: 1 1 0;
+  min-width: max-content;
+}
+
+.stepper__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  padding: 0;
+  border: 0;
+  background: none;
+  font-weight: 650;
+  font-size: 0.92rem;
+  color: var(--c-ink-faint);
+}
+
+button.stepper__btn {
+  color: var(--c-ink);
+}
+
+.stepper__dot {
+  display: grid;
+  place-items: center;
+  width: 1.7rem;
+  height: 1.7rem;
+  border-radius: 50%;
+  background: var(--c-sky);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.stepper__item.is-current .stepper__dot {
+  background: var(--c-blue);
+  color: #fff;
+}
+
+.stepper__item.is-current .stepper__btn {
+  color: var(--c-ink);
+}
+
+.stepper__item.is-done .stepper__dot {
+  background: var(--c-ok);
+  color: #fff;
+}
+
+/* ---------- Contenido de cada paso ---------- */
+.step {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-4);
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.step__title {
+  padding: 0;
+  font-family: var(--f-display);
+  font-size: 1.9rem;
+  font-weight: 740;
+  font-stretch: 82%;
+  line-height: 1.05;
+}
+
+.step__title:focus {
+  outline: none;
+}
+
+.step__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-3);
+  margin-top: var(--s-2);
+}
+
+/* ---------- Paso 1: elección de servicio ---------- */
+.choice-list {
+  display: grid;
+  gap: var(--s-3);
+}
+
+.choice {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: var(--s-3);
+  padding: var(--s-4);
+  background: var(--c-surface);
+  border: 2px solid var(--c-line);
+  border-radius: var(--radius-m);
+  cursor: pointer;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.choice:hover {
+  border-color: var(--c-ink-faint);
+}
+
+.choice:has(input:checked) {
+  border-color: var(--c-blue);
+  background: var(--c-blue-soft);
+}
+
+.choice:has(input:focus-visible) {
+  outline: 3px solid var(--c-blue);
+  outline-offset: 2px;
+}
+
+.choice input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.choice__body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-width: 0;
+}
+
+.choice__name {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s-2);
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.choice__meta {
+  font-size: 0.88rem;
+  color: var(--c-ink-soft);
+}
+
+.choice__price {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  font-family: var(--f-display);
+  font-size: 1.4rem;
+  font-weight: 750;
+  font-stretch: 85%;
+  font-variant-numeric: tabular-nums;
+}
+
+.choice__price s {
+  font-family: var(--f-body);
+  font-size: 0.82rem;
+  font-weight: 400;
+  color: var(--c-ink-faint);
+}
+
+/* ---------- Paso 2: días y horas ---------- */
+.day-strip {
+  display: flex;
+  gap: var(--s-2);
+  padding-bottom: var(--s-2);
+  margin-inline: calc(var(--s-1) * -1);
+  padding-inline: var(--s-1);
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  scrollbar-width: thin;
+}
+
+.day-chip {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.05rem;
+  width: 4.1rem;
+  padding: 0.55rem 0.2rem;
+  background: var(--c-surface);
+  border: 2px solid var(--c-line);
+  border-radius: var(--radius-m);
+  scroll-snap-align: center;
+  line-height: 1.1;
+}
+
+.day-chip__dow,
+.day-chip__mon {
+  font-family: var(--f-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--c-ink-soft);
+}
+
+.day-chip__num {
+  font-family: var(--f-display);
+  font-size: 1.7rem;
+  font-weight: 760;
+  font-stretch: 85%;
+}
+
+.day-chip:hover:not([disabled]) {
+  border-color: var(--c-ink-faint);
+}
+
+.day-chip[aria-pressed='true'] {
+  background: var(--c-ink);
+  border-color: var(--c-ink);
+  color: #fff;
+}
+
+.day-chip[aria-pressed='true'] .day-chip__dow,
+.day-chip[aria-pressed='true'] .day-chip__mon {
+  color: #c9d6e6;
+}
+
+.day-chip[disabled] {
+  opacity: 0.4;
+  cursor: not-allowed;
+  background: transparent;
+}
+
+/* ---------- Paso 3 y final ---------- */
+.hp {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+.done__mark {
+  display: grid;
+  place-items: center;
+  width: 3.2rem;
+  height: 3.2rem;
+  border-radius: 50%;
+  background: var(--c-ok);
+  color: #fff;
+}

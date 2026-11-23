@@ -1,0 +1,48 @@
+/* Superficies: tarjeta simple y panel. Se usan por rol, no en todo. */
+.card {
+  background: var(--c-surface);
+  border: 1px solid var(--c-line);
+  border-radius: var(--radius-m);
+  padding: var(--s-5);
+}
+
+.panel {
+  background: var(--c-surface);
+  border-radius: var(--radius-l);
+  padding: clamp(var(--s-4), 3vw, var(--s-6));
+  box-shadow: var(--shadow-1);
+}
+
+.empty {
+  padding: var(--s-6) var(--s-4);
+  text-align: center;
+  color: var(--c-ink-soft);
+  border: 2px dashed var(--c-line);
+  border-radius: var(--radius-m);
+}
+
+.notice {
+  display: flex;
+  gap: var(--s-3);
+  align-items: flex-start;
+  padding: var(--s-3) var(--s-4);
+  border-radius: var(--radius-m);
+  background: var(--c-sun-soft);
+  color: var(--c-sun-ink);
+  font-size: 0.95rem;
+}
+
+.notice--blue {
+  background: var(--c-blue-soft);
+  color: var(--c-blue-deep);
+}
+
+.notice--red {
+  background: var(--c-red-soft);
+  color: var(--c-red-deep);
+}
+
+.notice .icon {
+  flex: none;
+  margin-top: 0.1rem;
+}

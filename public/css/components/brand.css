@@ -1,0 +1,31 @@
+/* Marca: logo + nombre (cabecera del sitio y menú del panel). */
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-3);
+  color: var(--c-ink);
+  text-decoration: none;
+}
+
+.brand__text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+}
+
+.brand__name {
+  font-family: var(--f-display);
+  font-weight: 780;
+  font-stretch: 80%;
+  font-size: 1.55rem;
+  letter-spacing: -0.01em;
+}
+
+.brand__sub {
+  margin-top: 0.2rem;
+  font-family: var(--f-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--c-ink-faint);
+}

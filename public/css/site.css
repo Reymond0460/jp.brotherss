@@ -1,0 +1,27 @@
+/*
+ * Hoja de estilos del sitio público. Solo importa los módulos, en este orden:
+ * base → componentes reutilizables → secciones del sitio.
+ */
+@import 'base/fonts.css';
+@import 'base/tokens.css';
+@import 'base/reset.css';
+@import 'base/typography.css';
+@import 'base/layout.css';
+
+@import 'components/button.css';
+@import 'components/form.css';
+@import 'components/surface.css';
+@import 'components/ticket.css';
+@import 'components/pole.css';
+@import 'components/feedback.css';
+@import 'components/slots.css';
+@import 'components/brand.css';
+
+@import 'site/header.css';
+@import 'site/hero.css';
+@import 'site/promos.css';
+@import 'site/services.css';
+@import 'site/booking.css';
+@import 'site/sections.css';
+@import 'site/footer.css';
+@import 'site/legal.css';

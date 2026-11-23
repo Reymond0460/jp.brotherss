@@ -1,0 +1,20 @@
+{
+  "name": "jp-brothers",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Sitio de reservas y panel de administración para JP Brothers Barbería (HTML + CSS + JavaScript, sin framework).",
+  "type": "module",
+  "scripts": {
+    "dev": "node scripts/dev-server.mjs",
+    "test": "node --test tests/*.test.js",
+    "artifact": "node scripts/build-artifact.mjs",
+    "deploy:qa": "firebase deploy --only hosting:qa,firestore:rules,firestore:indexes",
+    "deploy:prod": "firebase deploy --only hosting:prod,firestore:rules,firestore:indexes"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

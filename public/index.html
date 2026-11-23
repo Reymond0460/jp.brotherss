@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="es-CL">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>JP Brothers Barbería · Reserva tu hora online</title>
+    <meta name="description" content="Barbería JP Brothers en Gran Avenida. Reserva tu hora online, mira promos y confirma por WhatsApp." />
+    <meta name="theme-color" content="#edf3f8" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="JP Brothers Barbería" />
+    <meta property="og:description" content="Reserva tu hora online y confirma por WhatsApp." />
+    <meta property="og:locale" content="es_CL" />
+
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+    <link rel="preload" href="assets/fonts/bricolage-grotesque.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="css/site.css" />
+    <script type="module" src="js/site/main.js"></script>
+
+    <!-- Datos estructurados para buscadores (no es código ejecutable). -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BarberShop",
+        "name": "JP Brothers Barbería",
+        "address": { "@type": "PostalAddress", "streetAddress": "Gran Av. José Miguel Carrera 9397", "addressCountry": "CL" },
+        "sameAs": ["https://www.instagram.com/jp.brotherss/"]
+      }
+    </script>
+  </head>
+
+  <body class="site">
+    <a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+    <!-- ============ Cabecera ============ -->
+    <header class="site-header">
+      <div class="pole-band" aria-hidden="true"></div>
+      <div class="container site-header__inner">
+        <a class="brand" href="#inicio" aria-label="JP Brothers, ir al inicio">
+          <img class="brand__mark" src="assets/logo.svg" width="40" height="40" alt="" />
+          <span class="brand__text"><span class="brand__name">JP Brothers</span><span class="brand__sub">Barbería</span></span>
+        </a>
+
+        <button class="menu-toggle" id="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Abrir menú">
+          <span data-icon="menu"></span>
+        </button>
+
+        <nav class="site-nav" id="site-nav" aria-label="Principal">
+          <a href="#servicios">Servicios</a>
+          <a href="#promos" data-nav="promos">Promos</a>
+          <a href="#mi-reserva">Mi reserva</a>
+          <a href="#ubicacion">Ubicación</a>
+          <a class="btn btn--primary btn--sm site-nav__cta" href="#reservar">Reservar hora</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="contenido">
+      <!-- ============ Portada ============ -->
+      <section class="hero" id="inicio">
+        <div class="container hero__grid">
+          <div class="hero__copy stack">
+            <p class="status-chip" id="open-status">
+              <span class="status-chip__dot" aria-hidden="true"></span>
+              <span class="status-chip__text">Revisando horario…</span>
+            </p>
+            <h1>Tu corte,<br />a tu <span class="h1-mark">hora.</span></h1>
+            <p class="lead">Barbería en Gran Avenida. Elige tu servicio, reserva en un minuto y confirma por WhatsApp. Sin esperas en la puerta.</p>
+            <div class="row hero__cta">
+              <a class="btn btn--primary" href="#reservar">Reservar hora <span data-icon="arrow-right" data-size="18"></span></a>
+              <a class="btn btn--ghost" href="#servicios">Ver precios</a>
+            </div>
+            <ul class="hero__facts">
+              <li><span data-icon="pin" data-size="18"></span><span data-business="street">Gran Av. José Miguel Carrera 9397</span></li>
+              <li>
+                <span data-icon="instagram" data-size="18"></span>
+                <a data-link="instagram" href="https://www.instagram.com/jp.brotherss/" target="_blank" rel="noopener"><span data-business="instagram">@jp.brotherss</span></a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="hero__art">
+            <div class="pole" aria-hidden="true"></div>
+            <div class="hero__ticket" id="hero-ticket" aria-live="polite"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ Promos (se oculta si no hay vigentes) ============ -->
+      <section class="section promos" id="promos" hidden>
+        <div class="container">
+          <header class="section-head">
+            <p class="eyebrow"><span data-icon="tag" data-size="16"></span>Promos vigentes</p>
+            <h2>Ofertas de la semana</h2>
+          </header>
+          <ul class="coupon-list" id="promos-list"></ul>
+        </div>
+      </section>
+
+      <!-- ============ Servicios ============ -->
+      <section class="section" id="servicios">
+        <div class="container">
+          <header class="section-head">
+            <p class="eyebrow"><span data-icon="scissors" data-size="16"></span>Precios en pesos chilenos</p>
+            <h2>Servicios</h2>
+            <p class="lead">Toca un servicio para reservarlo.</p>
+          </header>
+          <ul class="menu-board" id="services-list"></ul>
+        </div>
+      </section>
+
+      <div class="comb" aria-hidden="true"></div>
+
+      <!-- ============ Reservar ============ -->
+      <section class="section" id="reservar">
+        <div class="container">
+          <header class="section-head">
+            <p class="eyebrow"><span data-icon="calendar" data-size="16"></span>Reserva online</p>
+            <h2>Reserva tu hora</h2>
+          </header>
+          <div id="booking-root"></div>
+        </div>
+      </section>
+
+      <!-- ============ Mi reserva ============ -->
+      <section class="section section--sky" id="mi-reserva">
+        <div class="container">
+          <header class="section-head">
+            <p class="eyebrow"><span data-icon="ticket" data-size="16"></span>Con tu código de reserva</p>
+            <h2>Ver mi reserva</h2>
+            <p class="lead">Revisa el estado de tu hora, cancélala o pide un cambio.</p>
+          </header>
+          <div id="my-booking-root"></div>
+        </div>
+      </section>
+
+      <!-- ============ Ubicación ============ -->
+      <section class="section" id="ubicacion">
+        <div class="container">
+          <header class="section-head">
+            <p class="eyebrow"><span data-icon="pin" data-size="16"></span><span data-business="street">Gran Av. José Miguel Carrera 9397</span></p>
+            <h2>Cómo llegar</h2>
+          </header>
+          <div id="location-root"></div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ============ Pie de página ============ -->
+    <footer class="site-footer">
+      <div class="pole-band" aria-hidden="true"></div>
+      <div class="container site-footer__grid">
+        <div class="stack">
+          <p class="brand__name site-footer__brand">JP Brothers <span class="muted">Barbería</span></p>
+          <p class="muted"><span data-business="street">Gran Av. José Miguel Carrera 9397</span></p>
+          <p class="row">
+            <a data-link="whatsapp" href="https://wa.me/56940916058" target="_blank" rel="noopener">WhatsApp</a>
+            <a data-link="instagram" href="https://www.instagram.com/jp.brotherss/" target="_blank" rel="noopener">Instagram</a>
+          </p>
+        </div>
+        <nav class="stack" aria-label="Secciones">
+          <a href="#servicios">Servicios</a>
+          <a href="#reservar">Reservar</a>
+          <a href="#mi-reserva">Mi reserva</a>
+          <a href="#ubicacion">Ubicación</a>
+        </nav>
+        <nav class="stack" aria-label="Legal">
+          <a href="privacidad.html">Política de privacidad</a>
+          <a href="cookies.html">Política de cookies</a>
+          <a href="cookies.html" data-open-cookies>Preferencias de cookies</a>
+          <a href="admin.html" class="muted">Acceso barbero</a>
+        </nav>
+      </div>
+      <div class="container site-footer__legal">
+        <p>© <span id="year">2026</span> JP Brothers Barbería</p>
+        <p>Sitio web creado por <a href="https://tiforti.cl" target="_blank" rel="noopener">tiforti.cl</a></p>
+      </div>
+    </footer>
+
+    <!-- Botón flotante de WhatsApp -->
+    <a class="wa-fab" data-link="whatsapp" href="https://wa.me/56940916058" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp">
+      <span data-icon="whatsapp" data-size="28"></span>
+    </a>
+
+    <div id="cookie-banner"></div>
+  </body>
+</html>

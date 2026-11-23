@@ -1,0 +1,46 @@
+/* Horas seleccionables (sitio público y panel). */
+.slots {
+  min-height: 7rem;
+}
+
+.slots__title {
+  margin-bottom: var(--s-3);
+  font-weight: 650;
+}
+
+.slot-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(5rem, 1fr));
+  gap: var(--s-2);
+}
+
+.slot {
+  min-height: 2.8rem;
+  border: 2px solid var(--c-line);
+  border-radius: 10px;
+  background: var(--c-surface);
+  font-family: var(--f-mono);
+  font-size: 0.98rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  transition: border-color 0.15s ease, background-color 0.15s ease, color 0.15s ease;
+}
+
+.slot:hover:not([disabled]) {
+  border-color: var(--c-blue);
+  color: var(--c-blue-deep);
+}
+
+.slot.is-selected {
+  background: var(--c-blue);
+  border-color: var(--c-blue);
+  color: #fff;
+}
+
+.slot.is-busy {
+  background: transparent;
+  color: var(--c-ink-faint);
+  text-decoration: line-through;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
