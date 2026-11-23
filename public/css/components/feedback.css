@@ -122,19 +122,20 @@
   gap: var(--s-3);
   padding: 0.8rem 1rem;
   border-radius: var(--radius-m);
-  background: var(--c-ink);
-  color: #fff;
+  background: var(--c-inverse-bg);
+  color: var(--c-inverse-fg);
   font-weight: 600;
   box-shadow: var(--shadow-2);
   animation: toast-in 0.25s ease;
 }
 
 .toast--success .icon {
-  color: #7be0ae;
+  color: var(--c-inverse-ok);
 }
 
 .toast--error {
-  background: var(--c-red-deep);
+  background: var(--c-danger-bg);
+  color: #fff;
 }
 
 @keyframes toast-in {

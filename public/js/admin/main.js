@@ -1,14 +1,16 @@
 /**
- * Punto de entrada del PANEL DE ADMINISTRACIÓN (admin.html).
+ * Punto de entrada del PANEL DE ADMINISTRACIÓN (/admin/).
  */
 import { $ } from '../core/dom.js';
 import { getRepository } from '../data/repository.js';
 import { hydrateIcons } from '../ui/icons.js';
+import { initTheme } from '../ui/theme.js';
 import { initAuthGate } from './auth-gate.js';
 import { startApp } from './shell.js';
 
 async function boot() {
   hydrateIcons();
+  initTheme();
   const loginRoot = $('#login-root');
   const appRoot = $('#app-root');
 

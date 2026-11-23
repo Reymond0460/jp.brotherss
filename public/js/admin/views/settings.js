@@ -8,6 +8,7 @@ import { validateBusiness } from '../../domain/validators.js';
 import { seedDefaults } from '../../services/seed-service.js';
 import { confirmDialog } from '../../ui/dialog.js';
 import { field, input, showFieldErrors } from '../../ui/form.js';
+import { refreshThemeToggles } from '../../ui/theme.js';
 import { toast } from '../../ui/toast.js';
 import { pageHeader } from '../components/page-header.js';
 
@@ -143,7 +144,9 @@ export async function renderSettings(host, ctx) {
       seedBox,
       el('section', { class: 'panel stack' }, el('h2', { class: 'h3' }, 'Datos del negocio'), businessForm),
       el('section', { class: 'panel stack' }, el('h2', { class: 'h3' }, 'Mi cuenta'), el('p', { class: 'muted' }, `Sesión iniciada como ${ctx.user.email}`), passwordForm),
+      el('section', { class: 'panel stack' }, el('h2', { class: 'h3' }, 'Apariencia'), el('p', { class: 'muted' }, 'Elige el modo claro u oscuro del panel y del sitio en este dispositivo.'), el('div', { class: 'row' }, el('button', { class: 'btn btn--ghost', type: 'button', 'data-theme-toggle': '' }))),
       demoBox,
     ),
   );
+  refreshThemeToggles();
 }

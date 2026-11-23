@@ -27,6 +27,12 @@
   box-shadow: var(--shadow-2);
 }
 
+.login__tools {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: calc(var(--s-3) * -1);
+}
+
 .login__title {
   font-size: 2.6rem;
 }

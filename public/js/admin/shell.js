@@ -2,9 +2,11 @@
  * Estructura del panel: menú lateral (escritorio) / barra inferior (móvil) y zona de contenido.
  */
 import { ENV } from '../config/env.js';
+import { ROUTES } from '../config/routes.js';
 import { $, el, replaceContent } from '../core/dom.js';
 import { loadCatalog } from '../services/booking-service.js';
 import { icon } from '../ui/icons.js';
+import { refreshThemeToggles } from '../ui/theme.js';
 import { toast } from '../ui/toast.js';
 import { createRouter } from './router.js';
 import { renderAgenda } from './views/agenda.js';
@@ -58,19 +60,21 @@ export async function startApp({ repo, user, appRoot }) {
   const nav = el(
     'aside',
     { class: 'admin-nav' },
-    el('a', { class: 'brand admin-nav__brand', href: '#resumen' }, el('img', { class: 'brand__mark', src: 'assets/logo-jp-192.webp', width: 36, height: 36, alt: '' }), el('span', { class: 'brand__text' }, el('span', { class: 'brand__name' }, 'JP Brothers'), el('span', { class: 'brand__sub' }, 'Panel'))),
+    el('a', { class: 'brand admin-nav__brand', href: '#resumen' }, el('img', { class: 'brand__mark', src: '/assets/logo-jp-192.webp', width: 36, height: 36, alt: '' }), el('span', { class: 'brand__text' }, el('span', { class: 'brand__name' }, 'JP Brothers'), el('span', { class: 'brand__sub' }, 'Panel'))),
     el('nav', { class: 'admin-nav__links', 'aria-label': 'Secciones del panel' }, links),
     el(
       'div',
       { class: 'admin-nav__foot' },
       el('span', { class: `env-badge env-badge--${ENV.name}` }, ENV_LABEL[ENV.name]),
       el('p', { class: 'admin-nav__user' }, user.email),
-      el('a', { class: 'link-btn', href: 'index.html' }, 'Ver sitio público'),
+      el('a', { class: 'link-btn', href: ROUTES.home }, 'Ver sitio público'),
+      el('button', { class: 'btn btn--ghost btn--sm btn--block', type: 'button', 'data-theme-toggle': '' }),
       logout,
     ),
   );
 
   replaceContent(appRoot, el('div', { class: 'admin-shell' }, nav, outlet));
+  refreshThemeToggles();
 
   activeRouter?.destroy(); // si se vuelve a iniciar sesión, no se duplican los listeners
   activeRouter = createRouter({

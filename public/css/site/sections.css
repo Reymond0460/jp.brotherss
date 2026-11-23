@@ -81,16 +81,16 @@
 }
 
 .map__land {
-  fill: #e3edf5;
+  fill: var(--c-sky);
 }
 
 .map__block {
-  fill: #cfdfec;
+  fill: var(--c-sky-strong);
 }
 
 .map__road {
   fill: none;
-  stroke: #fff;
+  stroke: var(--c-surface);
   stroke-linecap: round;
 }
 

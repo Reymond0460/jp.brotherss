@@ -15,7 +15,35 @@ const PUBLIC = resolve(ROOT, 'public');
 const OUT = resolve(ROOT, 'artifact');
 
 // La primera página es la "principal" del artefacto: va como fragmento (sin <html>/<head>).
-const PAGES = ['index', 'admin', 'privacidad', 'cookies'];
+// nombre del archivo en el artefacto → archivo fuente dentro de public/
+const PAGES = {
+  index: 'index.html',
+  admin: 'admin/index.html',
+  privacidad: 'privacidad/index.html',
+  cookies: 'cookies/index.html',
+};
+
+// En el artefacto las páginas son archivos hermanos, no carpetas: se reescriben las rutas.
+const ARTIFACT_ROUTES = { home: 'index.html', admin: 'admin.html', privacy: 'privacidad.html', cookies: 'cookies.html' };
+const rewriteLinks = (html) =>
+  html
+    .replaceAll('href="/admin/"', `href="${ARTIFACT_ROUTES.admin}"`)
+    .replaceAll('href="/privacidad/"', `href="${ARTIFACT_ROUTES.privacy}"`)
+    .replaceAll('href="/cookies/"', `href="${ARTIFACT_ROUTES.cookies}"`)
+    .replaceAll('href="/#', `href="${ARTIFACT_ROUTES.home}#`)
+    .replaceAll('href="/"', `href="${ARTIFACT_ROUTES.home}"`);
+
+/** Sustituye config/routes.js por una versión con las rutas del artefacto. */
+const artifactRoutes = {
+  name: 'artifact-routes',
+  setup(b) {
+    b.onResolve({ filter: /config\/routes\.js$/ }, () => ({ path: 'routes-artifact', namespace: 'routes' }));
+    b.onLoad({ filter: /.*/, namespace: 'routes' }, () => ({
+      contents: `export const ROUTES = ${JSON.stringify(ARTIFACT_ROUTES)}; export const homeAnchor = (id) => ROUTES.home + '#' + id;`,
+      loader: 'js',
+    }));
+  },
+};
 
 /** Reemplaza el backend de Firebase por un stub: en el artefacto solo existe el modo demo. */
 const stubFirebase = {
@@ -29,22 +57,22 @@ const stubFirebase = {
   },
 };
 
-const LOGO = 'assets/logo-jp-192.webp';
-const logoDataUri = `data:image/webp;base64,${(await readFile(resolve(PUBLIC, LOGO))).toString('base64')}`;
+const LOGO = '/assets/logo-jp-192.webp';
+const logoDataUri = `data:image/webp;base64,${(await readFile(resolve(PUBLIC, LOGO.slice(1)))).toString('base64')}`;
 // Imagen grande de la portada (también va incrustada).
-const HERO_IMAGE = 'assets/logo-jp-768.webp';
-const heroDataUri = `data:image/webp;base64,${(await readFile(resolve(PUBLIC, HERO_IMAGE))).toString('base64')}`;
+const HERO_IMAGE = '/assets/logo-jp-768.webp';
+const heroDataUri = `data:image/webp;base64,${(await readFile(resolve(PUBLIC, HERO_IMAGE.slice(1)))).toString('base64')}`;
 
 async function bundleJs(entry) {
   const result = await build({
-    entryPoints: [resolve(PUBLIC, entry)],
+    entryPoints: [resolve(PUBLIC, entry.replace(/^\//, ''))],
     bundle: true,
     write: false,
     format: 'iife',
     minify: true,
     target: 'es2022',
     charset: 'ascii', // escapa tildes y ñ: el código funciona aunque el archivo se lea con otra codificación
-    plugins: [stubFirebase],
+    plugins: [stubFirebase, artifactRoutes],
   });
   // El logo se referencia por texto en el JS; se sustituye por la imagen incrustada.
   // Se escapa "</script" para que el navegador no cierre la etiqueta antes de tiempo.
@@ -53,7 +81,7 @@ async function bundleJs(entry) {
 
 async function bundleCss(entry) {
   const result = await build({
-    entryPoints: [resolve(PUBLIC, entry)],
+    entryPoints: [resolve(PUBLIC, entry.replace(/^\//, ''))],
     bundle: true,
     write: false,
     minify: true,
@@ -71,13 +99,14 @@ const pick = (html, regex, label) => {
 
 await mkdir(OUT, { recursive: true });
 
-for (const [index, name] of PAGES.entries()) {
-  const html = await readFile(resolve(PUBLIC, `${name}.html`), 'utf8');
+for (const [index, [name, source]] of Object.entries(PAGES).entries()) {
+  const html = await readFile(resolve(PUBLIC, source), 'utf8');
   // El nombre de la pestaña/galería del artefacto debe ser corto: solo el nombre del negocio.
   const title = index === 0 ? 'JP Brothers Barbería' : pick(html, /<title>([\s\S]*?)<\/title>/, 'title');
   const cssEntry = pick(html, /<link rel="stylesheet" href="([^"]+)"/, 'hoja de estilos');
   const jsEntry = pick(html, /<script type="module" src="([^"]+)"/, 'script');
   let body = pick(html, /<body[^>]*>([\s\S]*)<\/body>/, 'body').replaceAll(LOGO, logoDataUri).replaceAll(HERO_IMAGE, heroDataUri);
+  body = rewriteLinks(body);
 
   const css = await bundleCss(cssEntry);
   const js = await bundleJs(jsEntry);

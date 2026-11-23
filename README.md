@@ -6,14 +6,14 @@ Hecho con **HTML + CSS + JavaScript puro** (sin frameworks, sin bundler). Datos 
 
 ## Qué incluye
 
-**Sitio público** (`public/index.html`)
+**Sitio público** (`/` → `public/index.html`)
 - Portada con estado "abierto / cerrado" y la próxima hora libre.
 - Promos vigentes, servicios con precios y reserva en 3 pasos (servicio → día y hora → datos).
 - "Ver mi reserva" solo con el código (permite cancelar o pedir cambios por WhatsApp).
 - Ubicación con botones a Google Maps, Apple Maps y Waze, y mapa incrustado (con consentimiento).
 - Políticas de privacidad y de cookies, aviso de cookies, cabeceras de seguridad.
 
-**Panel del barbero** (`public/admin.html`)
+**Panel del barbero** (`/admin/` → `public/admin/index.html`)
 - Resumen: cortes y dinero de hoy y del mes, gráficos de rendimiento.
 - Agenda por día: confirmar, cobrar, reprogramar, cancelar, escribir al cliente por WhatsApp.
 - Horarios: días y horas de trabajo, días cerrados, bloqueo de horas sueltas.
@@ -23,7 +23,7 @@ Hecho con **HTML + CSS + JavaScript puro** (sin frameworks, sin bundler). Datos 
 
 ```powershell
 npm install        # solo la primera vez (únicamente instala esbuild, ver "Tecnologías")
-npm run dev        # http://localhost:5173  (admin en /admin.html)
+npm run dev        # http://localhost:5173  (admin en /admin/)
 npm test           # pruebas de la lógica
 ```
 
@@ -46,20 +46,24 @@ Ramas de Git: `main` → producción, `QA` → pruebas. Se trabaja en `QA`, se p
 
 ```
 public/                     ← lo que se publica (Firebase Hosting)
-  index.html  admin.html  privacidad.html  cookies.html
+  index.html              portada            →  /
+  admin/index.html        panel del barbero  →  /admin/
+  privacidad/index.html   política de privacidad  →  /privacidad/
+  cookies/index.html      política de cookies     →  /cookies/
+  404.html  robots.txt  manifest.webmanifest
   css/
     base/                   tokens (colores, tipografías), reset, tipografía, layout
     components/             botones, formularios, ticket, poste de barbero, etc.
     site/                   estilos del sitio público (una hoja por sección)
     admin/                  estilos del panel
   js/
-    config/                 constants, defaults (servicios/horarios de ejemplo), env, firebase-config
+    config/                 constants, routes (URLs de las páginas), defaults, env, firebase-config
     core/                   utilidades sin dependencias: dom, fechas, formato, ids
     domain/                 REGLAS DE NEGOCIO puras (disponibilidad, precios, estadísticas, validaciones)
     data/                   acceso a datos: contract (interfaz), firebase-backend, local-backend
     services/               casos de uso (reservar, buscar horas…) que unen domain + data
     ui/                     piezas visuales reutilizables (iconos, modal, toast, gráficos, ticket)
-    site/                   sitio público: main.js + components/
+    site/                   sitio público: main.js, layout.js (cabecera/pie compartidos), components/
     admin/                  panel: main.js, router, vistas en views/
 firestore.rules             reglas de seguridad de la base de datos
 firebase.json               hosting (prod y qa), cabeceras de seguridad
@@ -71,7 +75,9 @@ tests/                      pruebas automáticas
 - Colores y tipografías: `public/css/base/tokens.css`.
 - Servicios, precios, horarios y promos: se editan desde el panel. Los valores iniciales de ejemplo están en `public/js/config/defaults.js`.
 - Número de WhatsApp, dirección, Instagram: panel → Ajustes (valores iniciales en `defaults.js`).
-- Textos legales: `public/privacidad.html` y `public/cookies.html`.
+- Textos legales: `public/privacidad/index.html` y `public/cookies/index.html`.
+- URLs de las páginas: `public/js/config/routes.js` (y los redirects de `firebase.json` si se cambian).
+- Cabecera y pie de las páginas secundarias: `public/js/site/layout.js`.
 - Cambiar de base de datos: se escribe otro backend que cumpla `public/js/data/contract.js`.
 
 ## Cómo funciona la reserva (sin doble reserva)

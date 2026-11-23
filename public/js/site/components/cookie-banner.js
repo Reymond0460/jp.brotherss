@@ -6,6 +6,7 @@
  * instalar cookies de Google. Por eso el mapa solo se carga con permiso del visitante.
  */
 import { STORAGE_KEYS } from '../../config/constants.js';
+import { ROUTES } from '../../config/routes.js';
 import { $, el } from '../../core/dom.js';
 import { emit } from '../../core/events.js';
 import { safeStorage } from '../../core/safe-storage.js';
@@ -40,7 +41,7 @@ export function initCookieBanner() {
           {},
           'Usamos almacenamiento propio para que la web funcione y recordar tu última reserva. ',
           'Con tu permiso también mostramos el mapa de Google, que puede instalar sus propias cookies. ',
-          el('a', { href: 'cookies.html' }, 'Más información'),
+          el('a', { href: ROUTES.cookies }, 'Más información'),
           '.',
         ),
         el('div', { class: 'row' }, only, all),

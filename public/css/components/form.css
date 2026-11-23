@@ -142,9 +142,9 @@
 }
 
 .chip input:checked + span {
-  background: var(--c-ink);
-  border-color: var(--c-ink);
-  color: #fff;
+  background: var(--c-inverse-bg);
+  border-color: var(--c-inverse-bg);
+  color: var(--c-inverse-fg);
 }
 
 .chip input:focus-visible + span {

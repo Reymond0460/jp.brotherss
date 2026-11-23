@@ -6,33 +6,18 @@
     <title>Política de privacidad · JP Brothers Barbería</title>
     <meta name="description" content="Cómo JP Brothers Barbería trata los datos personales de quienes reservan una hora." />
     <meta name="theme-color" content="#edf3f8" />
-    <link rel="icon" type="image/png" href="assets/favicon.png" />
-    <link rel="stylesheet" href="css/site.css" />
-    <script type="module" src="js/site/legal.js"></script>
+    <link rel="icon" type="image/png" href="/assets/favicon.png" />
+    <link rel="stylesheet" href="/css/site.css" />
+    <script type="module" src="/js/site/legal.js"></script>
   </head>
 
   <body class="site">
     <a class="skip-link" href="#contenido">Saltar al contenido</a>
 
-    <header class="site-header">
-      <div class="pole-band" aria-hidden="true"></div>
-      <div class="container site-header__inner">
-        <a class="brand" href="index.html" aria-label="JP Brothers, volver al inicio">
-          <img class="brand__mark" src="assets/logo-jp-192.webp" width="44" height="44" alt="" />
-          <span class="brand__text"><span class="brand__name">JP Brothers</span><span class="brand__sub">Barbería</span></span>
-        </a>
-        <button class="menu-toggle" id="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Abrir menú"><span data-icon="menu"></span></button>
-        <nav class="site-nav" id="site-nav" aria-label="Principal">
-          <a href="index.html#servicios">Servicios</a>
-          <a href="index.html#mi-reserva">Mi reserva</a>
-          <a href="index.html#ubicacion">Ubicación</a>
-          <a class="btn btn--primary btn--sm site-nav__cta" href="index.html#reservar">Reservar hora</a>
-        </nav>
-      </div>
-    </header>
+    <div id="site-header"></div>
 
     <main id="contenido" class="container legal">
-      <a class="legal__back" href="index.html"><span data-icon="chevron-left" data-size="18"></span>Volver al inicio</a>
+      <a class="legal__back" href="/"><span data-icon="chevron-left" data-size="18"></span>Volver al inicio</a>
       <h1>Política de privacidad</h1>
       <p class="legal__meta">Última actualización: noviembre de 2026</p>
 
@@ -63,7 +48,7 @@
       <ul>
         <li><strong>Google Firebase</strong> (Hosting, Firestore y Authentication): aloja el sitio y guarda las reservas en servidores de Google.</li>
         <li><strong>WhatsApp (Meta)</strong>: solo si tú decides enviarnos el mensaje de confirmación.</li>
-        <li><strong>Google Maps</strong>: solo si aceptas cargar el mapa. Ver la <a href="cookies.html">política de cookies</a>.</li>
+        <li><strong>Google Maps</strong>: solo si aceptas cargar el mapa. Ver la <a href="/cookies/">política de cookies</a>.</li>
       </ul>
 
       <h2>5. Cuánto tiempo los guardamos</h2>
@@ -82,13 +67,7 @@
       <p>Si cambiamos esta política, publicaremos la nueva versión en esta misma página con su fecha de actualización.</p>
     </main>
 
-    <footer class="site-footer">
-      <div class="pole-band" aria-hidden="true"></div>
-      <div class="container site-footer__legal">
-        <p>© <span id="year">2026</span> JP Brothers Barbería · <a href="privacidad.html">Privacidad</a> · <a href="cookies.html">Cookies</a></p>
-        <p>Sitio web creado por <a href="https://tiforti.cl" target="_blank" rel="noopener">tiforti.cl</a></p>
-      </div>
-    </footer>
+    <div id="site-footer"></div>
 
     <div id="cookie-banner"></div>
   </body>

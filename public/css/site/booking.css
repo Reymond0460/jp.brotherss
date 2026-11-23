@@ -76,7 +76,7 @@ button.stepper__btn {
 }
 
 .stepper__item.is-done .stepper__dot {
-  background: var(--c-ok);
+  background: var(--c-ok-strong);
   color: #fff;
 }
 
@@ -240,14 +240,14 @@ button.stepper__btn {
 }
 
 .day-chip[aria-pressed='true'] {
-  background: var(--c-ink);
-  border-color: var(--c-ink);
-  color: #fff;
+  background: var(--c-inverse-bg);
+  border-color: var(--c-inverse-bg);
+  color: var(--c-inverse-fg);
 }
 
 .day-chip[aria-pressed='true'] .day-chip__dow,
 .day-chip[aria-pressed='true'] .day-chip__mon {
-  color: #c9d6e6;
+  color: color-mix(in srgb, var(--c-inverse-fg) 70%, transparent);
 }
 
 .day-chip[disabled] {
@@ -271,6 +271,6 @@ button.stepper__btn {
   width: 3.2rem;
   height: 3.2rem;
   border-radius: 50%;
-  background: var(--c-ok);
+  background: var(--c-ok-strong);
   color: #fff;
 }

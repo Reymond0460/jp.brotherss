@@ -12,6 +12,7 @@ export const STORAGE_KEYS = {
   lastBookingCode: 'jp.lastBooking.v1',
   demoState: 'jp.demo.state.v1',
   demoSession: 'jp.demo.session.v1',
+  theme: 'jp.theme.v1',
 };
 
 /** Reserva de ejemplo que existe siempre en el modo demo (para probar "Mi reserva"). */

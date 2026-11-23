@@ -33,8 +33,15 @@
   /* ---------- Color: estados ---------- */
   --c-ok: #1b7f53;
   --c-ok-soft: #dcf2e7;
+  --c-ok-strong: #1b7f53;   /* verde de fondo (texto blanco encima), igual en ambos temas */
+  --c-danger-bg: #b93128;   /* fondo de acciones destructivas (texto blanco encima) */
   --c-whatsapp: #15803d;
   --c-whatsapp-deep: #116530;
+
+  /* Colores "invertidos": cartelitos y tooltips que contrastan con el fondo de cada tema. */
+  --c-inverse-bg: #13233b;
+  --c-inverse-fg: #ffffff;
+  --c-inverse-ok: #7be0ae;
 
   /* ---------- Tipografía ---------- */
   --f-display: 'Bricolage Grotesque', 'Arial Narrow', system-ui, sans-serif;
@@ -70,4 +77,83 @@
   );
 
   color-scheme: light;
+}
+
+/*
+ * MODO OSCURO. Se activa si el sistema del cliente lo prefiere o si lo elige con el botón de la cabecera
+ * (que escribe data-theme="dark" | "light" en <html>; ver js/ui/theme.js).
+ * Solo se redefinen los colores: los componentes no cambian.
+ */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --c-bg: #0e1a2c;
+    --c-bg-soft: #13233a;
+    --c-surface: #172840;
+    --c-sky: #20385a;
+    --c-sky-strong: #2f4d78;
+    --c-line: #2c4262;
+
+    --c-ink: #e8eef7;
+    --c-ink-soft: #b6c4d8;
+    --c-ink-faint: #8fa3be;
+
+    --c-blue: #3f74e0;
+    --c-blue-deep: #9dbdff;
+    --c-blue-soft: #1d376a;
+    --c-red: #ef6a5f;
+    --c-red-deep: #f59389;
+    --c-red-soft: #4a2220;
+    --c-sun: #f4c74b;
+    --c-sun-soft: #3a3216;
+    --c-sun-ink: #f2d27a;
+
+    --c-ok: #4cc38a;
+    --c-ok-soft: #173a2c;
+    --c-danger-bg: #c93a30;
+
+    --c-inverse-bg: #e8eef7;
+    --c-inverse-fg: #0e1a2c;
+    --c-inverse-ok: #1b7f53;
+
+    --shadow-1: 0 1px 2px rgb(0 0 0 / 30%), 0 4px 14px rgb(0 0 0 / 25%);
+    --shadow-2: 0 2px 4px rgb(0 0 0 / 35%), 0 16px 36px rgb(0 0 0 / 45%);
+
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme='dark'] {
+  --c-bg: #0e1a2c;
+  --c-bg-soft: #13233a;
+  --c-surface: #172840;
+  --c-sky: #20385a;
+  --c-sky-strong: #2f4d78;
+  --c-line: #2c4262;
+
+  --c-ink: #e8eef7;
+  --c-ink-soft: #b6c4d8;
+  --c-ink-faint: #8fa3be;
+
+  --c-blue: #3f74e0;
+  --c-blue-deep: #9dbdff;
+  --c-blue-soft: #1d376a;
+  --c-red: #ef6a5f;
+  --c-red-deep: #f59389;
+  --c-red-soft: #4a2220;
+  --c-sun: #f4c74b;
+  --c-sun-soft: #3a3216;
+  --c-sun-ink: #f2d27a;
+
+  --c-ok: #4cc38a;
+  --c-ok-soft: #173a2c;
+  --c-danger-bg: #c93a30;
+
+  --c-inverse-bg: #e8eef7;
+  --c-inverse-fg: #0e1a2c;
+  --c-inverse-ok: #1b7f53;
+
+  --shadow-1: 0 1px 2px rgb(0 0 0 / 30%), 0 4px 14px rgb(0 0 0 / 25%);
+  --shadow-2: 0 2px 4px rgb(0 0 0 / 35%), 0 16px 36px rgb(0 0 0 / 45%);
+
+  color-scheme: dark;
 }

@@ -55,8 +55,8 @@
   top: -4rem;
   z-index: 100;
   padding: var(--s-2) var(--s-4);
-  background: var(--c-ink);
-  color: #fff;
+  background: var(--c-inverse-bg);
+  color: var(--c-inverse-fg);
   border-radius: var(--radius-s);
 }
 

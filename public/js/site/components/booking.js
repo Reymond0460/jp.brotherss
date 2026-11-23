@@ -6,6 +6,7 @@
  * mensaje por WhatsApp al barbero.
  */
 import { STORAGE_KEYS } from '../../config/constants.js';
+import { ROUTES } from '../../config/routes.js';
 import { $, el, replaceContent } from '../../core/dom.js';
 import { emit, listen } from '../../core/events.js';
 import { formatBookingCode } from '../../core/booking-code.js';
@@ -215,7 +216,7 @@ export function initBooking({ repo, catalog }) {
           { class: 'switch' },
           el('input', { type: 'checkbox', id: 'b-accepted', checked: client.accepted, onchange: bind('accepted') }),
           el('span', { class: 'switch__track' }),
-          el('span', {}, 'Acepto la ', el('a', { href: 'privacidad.html', target: '_blank', rel: 'noopener' }, 'política de privacidad')),
+          el('span', {}, 'Acepto la ', el('a', { href: ROUTES.privacy, target: '_blank', rel: 'noopener' }, 'política de privacidad')),
         ),
         errors.accepted ? el('p', { class: 'field__error' }, errors.accepted) : null,
       ),

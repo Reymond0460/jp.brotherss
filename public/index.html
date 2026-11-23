@@ -12,12 +12,13 @@
     <meta property="og:title" content="JP Brothers Barbería" />
     <meta property="og:description" content="Reserva tu hora online y confirma por WhatsApp." />
     <meta property="og:locale" content="es_CL" />
-    <meta property="og:image" content="assets/logo-jp-512.webp" />
+    <meta property="og:image" content="/assets/logo-jp-512.webp" />
 
-    <link rel="icon" type="image/png" href="assets/favicon.png" />
-    <link rel="preload" href="assets/fonts/bricolage-grotesque.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="css/site.css" />
-    <script type="module" src="js/site/main.js"></script>
+    <link rel="icon" type="image/png" href="/assets/favicon.png" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="preload" href="/assets/fonts/bricolage-grotesque.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="/css/site.css" />
+    <script type="module" src="/js/site/main.js"></script>
 
     <!-- Datos estructurados para buscadores (no es código ejecutable). -->
     <script type="application/ld+json">
@@ -39,13 +40,9 @@
       <div class="pole-band" aria-hidden="true"></div>
       <div class="container site-header__inner">
         <a class="brand" href="#inicio" aria-label="JP Brothers, ir al inicio">
-          <img class="brand__mark" src="assets/logo-jp-192.webp" width="44" height="44" alt="" />
+          <img class="brand__mark" src="/assets/logo-jp-192.webp" width="44" height="44" alt="" />
           <span class="brand__text"><span class="brand__name">JP Brothers</span><span class="brand__sub">Barbería</span></span>
         </a>
-
-        <button class="menu-toggle" id="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Abrir menú">
-          <span data-icon="menu"></span>
-        </button>
 
         <nav class="site-nav" id="site-nav" aria-label="Principal">
           <a href="#trabajos" data-nav="trabajos">Trabajos</a>
@@ -55,6 +52,13 @@
           <a href="#ubicacion">Ubicación</a>
           <a class="btn btn--primary btn--sm site-nav__cta" href="#reservar">Reservar hora</a>
         </nav>
+
+        <div class="site-header__tools">
+          <button class="theme-toggle" data-theme-toggle type="button" aria-label="Cambiar a modo oscuro"></button>
+          <button class="menu-toggle" id="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Abrir menú">
+            <span data-icon="menu"></span>
+          </button>
+        </div>
       </div>
     </header>
 
@@ -83,7 +87,7 @@
           </div>
 
           <div class="hero__art">
-            <img class="hero__logo" src="assets/logo-jp-768.webp" width="432" height="432" alt="JP Brothers: los dos barberos entre postes de barbería" />
+            <img class="hero__logo" src="/assets/logo-jp-768.webp" width="432" height="432" alt="JP Brothers: los dos barberos entre postes de barbería" />
             <div id="hero-ticket" aria-live="polite"></div>
           </div>
         </div>
@@ -179,10 +183,10 @@
           <a href="#ubicacion">Ubicación</a>
         </nav>
         <nav class="stack" aria-label="Legal">
-          <a href="privacidad.html">Política de privacidad</a>
-          <a href="cookies.html">Política de cookies</a>
-          <a href="cookies.html" data-open-cookies>Preferencias de cookies</a>
-          <a href="admin.html" class="muted">Acceso barbero</a>
+          <a href="/privacidad/">Política de privacidad</a>
+          <a href="/cookies/">Política de cookies</a>
+          <a href="/cookies/" data-open-cookies>Preferencias de cookies</a>
+          <a href="/admin/" class="muted">Acceso barbero</a>
         </nav>
       </div>
       <div class="container site-footer__legal">

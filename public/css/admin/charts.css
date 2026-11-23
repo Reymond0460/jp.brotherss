@@ -61,8 +61,8 @@
   flex-direction: column;
   gap: 0.1rem;
   padding: 0.4rem 0.7rem;
-  background: var(--c-ink);
-  color: #fff;
+  background: var(--c-inverse-bg);
+  color: var(--c-inverse-fg);
   border-radius: 8px;
   font-size: 0.82rem;
   line-height: 1.3;

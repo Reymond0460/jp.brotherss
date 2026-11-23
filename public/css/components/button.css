@@ -29,11 +29,11 @@
 .btn--primary {
   background: var(--c-blue);
   color: #fff;
-  box-shadow: 0 2px 0 var(--c-blue-deep);
+  box-shadow: 0 2px 0 color-mix(in srgb, var(--c-blue) 70%, black);
 }
 
 .btn--primary:hover:not([disabled]) {
-  background: var(--c-blue-deep);
+  background: color-mix(in srgb, var(--c-blue) 82%, black);
 }
 
 .btn--whatsapp {
@@ -67,12 +67,12 @@
 }
 
 .btn--danger {
-  background: var(--c-red-deep);
+  background: var(--c-danger-bg);
   color: #fff;
 }
 
 .btn--danger:hover:not([disabled]) {
-  background: #9a261f;
+  background: color-mix(in srgb, var(--c-danger-bg) 82%, black);
 }
 
 .btn--sm {
@@ -117,4 +117,21 @@
   font-weight: 600;
   text-decoration: underline;
   text-underline-offset: 0.2em;
+}
+
+/* Interruptor de modo claro/oscuro (icono solo). */
+.theme-toggle {
+  display: inline-grid;
+  place-items: center;
+  width: 2.8rem;
+  height: 2.8rem;
+  padding: 0;
+  border: 2px solid var(--c-line);
+  border-radius: 10px;
+  background: var(--c-surface);
+  color: var(--c-ink);
+}
+
+.theme-toggle:hover {
+  border-color: var(--c-ink-faint);
 }

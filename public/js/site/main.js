@@ -1,5 +1,5 @@
 /**
- * Punto de entrada del SITIO PÚBLICO (index.html).
+ * Punto de entrada del SITIO PÚBLICO (/).
  *
  * Orden: 1) cosas que no dependen de datos, 2) cargar datos, 3) iniciar cada componente.
  * Cada componente vive en site/components/ y recibe { repo, catalog }.
@@ -8,6 +8,7 @@ import { $, replaceContent, el } from '../core/dom.js';
 import { getRepository } from '../data/repository.js';
 import { loadCatalog } from '../services/booking-service.js';
 import { hydrateIcons } from '../ui/icons.js';
+import { initTheme } from '../ui/theme.js';
 import { bindBusiness } from './components/business-bind.js';
 import { initBooking } from './components/booking.js';
 import { initCookieBanner } from './components/cookie-banner.js';
@@ -21,6 +22,7 @@ import { initServices } from './components/services.js';
 
 async function boot() {
   hydrateIcons();
+  initTheme();
   $('#year').textContent = new Date().getFullYear();
   initHeader();
   initCookieBanner();

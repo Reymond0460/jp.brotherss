@@ -3,10 +3,12 @@
  * Solo entran cuentas registradas como administrador (el backend lo verifica).
  */
 import { ENV } from '../config/env.js';
+import { ROUTES } from '../config/routes.js';
 import { el, replaceContent } from '../core/dom.js';
 import { NotAdminError } from '../data/errors.js';
 import { field, input } from '../ui/form.js';
 import { icon } from '../ui/icons.js';
+import { refreshThemeToggles } from '../ui/theme.js';
 
 /** Traduce los códigos de error de Firebase Authentication a mensajes claros. */
 function loginErrorMessage(error) {
@@ -73,15 +75,18 @@ export function initAuthGate({ repo, loginRoot, appRoot, onLogin }) {
       el(
         'main',
         { class: 'login__card' },
-        el('img', { class: 'login__logo', src: 'assets/logo-jp-192.webp', width: 64, height: 64, alt: '' }),
+        el('div', { class: 'login__tools' }, el('button', { class: 'theme-toggle', 'data-theme-toggle': '', type: 'button' })),
+        el('img', { class: 'login__logo', src: '/assets/logo-jp-192.webp', width: 64, height: 64, alt: '' }),
         el('h1', { class: 'login__title' }, 'Panel del barbero'),
         el('p', { class: 'muted' }, 'JP Brothers Barbería'),
         ENV.demo ? el('p', { class: 'notice notice--blue' }, icon('info', { size: 18 }), 'Modo demo: escribe cualquier correo y contraseña para entrar. Los datos son de ejemplo y quedan solo en este navegador.') : null,
         form,
-        el('a', { class: 'muted', href: 'index.html' }, '← Volver al sitio'),
+        el('a', { class: 'muted', href: ROUTES.home }, '← Volver al sitio'),
       ),
     ),
   );
+
+  refreshThemeToggles();
 
   repo.onAuthChange((user) => {
     const active = Boolean(user);

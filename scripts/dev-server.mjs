@@ -31,7 +31,9 @@ createServer(async (req, res) => {
     res.writeHead(200, { 'Content-Type': TYPES[extname(file)] ?? 'application/octet-stream', 'Cache-Control': 'no-store' });
     res.end(body);
   } catch {
-    res.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8' });
-    res.end('No encontrado');
+    // Igual que Firebase Hosting: si existe 404.html, se usa como página de error.
+    const notFound = await readFile(join(ROOT, '404.html')).catch(() => null);
+    res.writeHead(404, { 'Content-Type': notFound ? TYPES['.html'] : 'text/plain; charset=utf-8' });
+    res.end(notFound ?? 'No encontrado');
   }
 }).listen(PORT, () => console.log(`JP Brothers → http://localhost:${PORT}  (admin: /admin.html)`));

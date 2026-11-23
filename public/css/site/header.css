@@ -82,3 +82,9 @@
     min-height: 3rem;
   }
 }
+
+.site-header__tools {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+}
