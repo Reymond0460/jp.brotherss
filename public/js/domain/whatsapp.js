@@ -21,7 +21,7 @@ export function clientBookingMessage(booking, business) {
     `• Nombre: ${booking.clientName}`,
     `• Código: ${formatBookingCode(booking.id)}`,
     '',
-    'Quedo atento a la confirmación. ¡Gracias!',
+    'Quedo atento a la confirmación.',
   ].join('\n');
 }
 
