@@ -1,7 +1,7 @@
 /* Portada: titular grande a la izquierda, ticket con la próxima hora libre a la derecha. */
 .hero {
   position: relative;
-  padding-block: clamp(var(--s-6), 6vw, var(--s-8)) clamp(var(--s-7), 7vw, var(--s-9));
+  padding-block: clamp(var(--s-5), 4vw, var(--s-7)) clamp(var(--s-7), 6vw, var(--s-8));
   overflow: clip;
 }
 
@@ -94,36 +94,87 @@
   box-shadow: 0 0 0 4px var(--c-ok-soft);
 }
 
-/* Lado derecho: el logo de los Brothers como imagen principal, con el ticket "pegado" debajo. */
+/* Lado derecho: el logo de los Brothers y, debajo, la próxima hora libre. Mismo ancho, sin inclinaciones. */
 .hero__art {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  gap: var(--s-4);
+  width: min(100%, 27rem);
+  justify-self: end;
 }
 
 .hero__logo {
-  width: min(100%, 27rem);
+  width: 100%;
   height: auto;
   aspect-ratio: 1;
-  border-radius: 28px;
+  border-radius: 24px;
   box-shadow: 0 0 0 4px var(--c-surface), var(--shadow-2);
-  transform: rotate(1.5deg);
 }
 
-.hero__ticket {
+/* Tarjeta "próxima hora libre": franja de poste a la izquierda, hora, detalle y botón. */
+.next-slot {
   position: relative;
-  z-index: 1;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: var(--s-2) var(--s-4);
+  padding: var(--s-4) var(--s-4) var(--s-4) var(--s-5);
+  background: var(--c-surface);
+  border-radius: var(--radius-m);
+  box-shadow: var(--shadow-1);
+  overflow: hidden;
+}
+
+.next-slot::before {
+  content: '';
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 7px;
+  background: var(--pole-stripes);
+  background-size: 51px 51px;
+}
+
+.next-slot__time {
   display: flex;
   flex-direction: column;
-  gap: var(--s-4);
-  width: min(100%, 21rem);
-  margin-top: -3.2rem;
-  align-self: flex-start;
-  transform: rotate(-1.5deg);
+  min-width: 5.2rem;
 }
 
-.hero__take {
-  transform: rotate(1.5deg);
+.next-slot__time small {
+  font-family: var(--f-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--c-ink-faint);
+}
+
+.next-slot__time strong {
+  min-height: 1em;
+  font-family: var(--f-display);
+  font-size: 2.8rem;
+  font-weight: 780;
+  font-stretch: 80%;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.next-slot__info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.next-slot__line {
+  font-weight: 650;
+}
+
+.next-slot__price {
+  color: var(--c-ink-soft);
+  font-variant-numeric: tabular-nums;
+}
+
+.next-slot .btn {
+  grid-column: 1 / -1;
 }
 
 @media (max-width: 900px) {
@@ -132,6 +183,6 @@
   }
 
   .hero__art {
-    align-items: flex-start;
+    justify-self: start;
   }
 }

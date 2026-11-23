@@ -21,7 +21,12 @@ export function initHeader() {
     if (event.key === 'Escape') setOpen(false);
   });
 
-  const onScroll = () => header.classList.toggle('is-scrolled', window.scrollY > 8);
+  const fabs = $('.fab-stack');
+  const onScroll = () => {
+    header.classList.toggle('is-scrolled', window.scrollY > 8);
+    // Los botones flotantes aparecen al bajar de la portada, para no tapar el primer vistazo.
+    fabs?.classList.toggle('is-visible', window.scrollY > 420);
+  };
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 }

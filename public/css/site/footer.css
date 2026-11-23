@@ -54,6 +54,16 @@
   flex-direction: column;
   align-items: center;
   gap: var(--s-3);
+  opacity: 0;
+  transform: translateY(10px);
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.fab-stack.is-visible {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
 }
 
 .ig-fab {
