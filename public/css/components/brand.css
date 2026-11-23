@@ -29,3 +29,14 @@
   text-transform: uppercase;
   color: var(--c-ink-faint);
 }
+
+/* Logo oficial: viene con fondo negro, así que se recorta en un cuadrado de esquinas suaves. */
+.brand__mark {
+  border-radius: 12px;
+  box-shadow: 0 0 0 2px var(--c-surface), 0 2px 8px rgb(19 35 59 / 18%);
+}
+
+.login__logo {
+  border-radius: 16px;
+  box-shadow: var(--shadow-1);
+}

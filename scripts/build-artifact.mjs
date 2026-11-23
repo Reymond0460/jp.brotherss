@@ -29,7 +29,8 @@ const stubFirebase = {
   },
 };
 
-const logoDataUri = `data:image/svg+xml;base64,${(await readFile(resolve(PUBLIC, 'assets/logo.svg'))).toString('base64')}`;
+const LOGO = 'assets/logo-jp-192.webp';
+const logoDataUri = `data:image/webp;base64,${(await readFile(resolve(PUBLIC, LOGO))).toString('base64')}`;
 
 async function bundleJs(entry) {
   const result = await build({
@@ -44,7 +45,7 @@ async function bundleJs(entry) {
   });
   // El logo se referencia por texto en el JS; se sustituye por la imagen incrustada.
   // Se escapa "</script" para que el navegador no cierre la etiqueta antes de tiempo.
-  return result.outputFiles[0].text.replaceAll('assets/logo.svg', logoDataUri).replaceAll('</script', '<\\/script');
+  return result.outputFiles[0].text.replaceAll(LOGO, logoDataUri).replaceAll('</script', '<\\/script');
 }
 
 async function bundleCss(entry) {
@@ -73,7 +74,7 @@ for (const [index, name] of PAGES.entries()) {
   const title = index === 0 ? 'JP Brothers Barbería' : pick(html, /<title>([\s\S]*?)<\/title>/, 'title');
   const cssEntry = pick(html, /<link rel="stylesheet" href="([^"]+)"/, 'hoja de estilos');
   const jsEntry = pick(html, /<script type="module" src="([^"]+)"/, 'script');
-  let body = pick(html, /<body[^>]*>([\s\S]*)<\/body>/, 'body').replaceAll('assets/logo.svg', logoDataUri);
+  let body = pick(html, /<body[^>]*>([\s\S]*)<\/body>/, 'body').replaceAll(LOGO, logoDataUri);
 
   const css = await bundleCss(cssEntry);
   const js = await bundleJs(jsEntry);

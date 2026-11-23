@@ -73,7 +73,7 @@ export function initAuthGate({ repo, loginRoot, appRoot, onLogin }) {
       el(
         'main',
         { class: 'login__card' },
-        el('img', { src: 'assets/logo.svg', width: 56, height: 56, alt: '' }),
+        el('img', { class: 'login__logo', src: 'assets/logo-jp-192.webp', width: 64, height: 64, alt: '' }),
         el('h1', { class: 'login__title' }, 'Panel del barbero'),
         el('p', { class: 'muted' }, 'JP Brothers Barbería'),
         ENV.demo ? el('p', { class: 'notice notice--blue' }, icon('info', { size: 18 }), 'Modo demo: escribe cualquier correo y contraseña para entrar. Los datos son de ejemplo y quedan solo en este navegador.') : null,

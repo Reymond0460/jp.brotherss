@@ -12,8 +12,9 @@
     <meta property="og:title" content="JP Brothers Barbería" />
     <meta property="og:description" content="Reserva tu hora online y confirma por WhatsApp." />
     <meta property="og:locale" content="es_CL" />
+    <meta property="og:image" content="assets/logo-jp-512.webp" />
 
-    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+    <link rel="icon" type="image/png" href="assets/favicon.png" />
     <link rel="preload" href="assets/fonts/bricolage-grotesque.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="stylesheet" href="css/site.css" />
     <script type="module" src="js/site/main.js"></script>
@@ -38,7 +39,7 @@
       <div class="pole-band" aria-hidden="true"></div>
       <div class="container site-header__inner">
         <a class="brand" href="#inicio" aria-label="JP Brothers, ir al inicio">
-          <img class="brand__mark" src="assets/logo.svg" width="40" height="40" alt="" />
+          <img class="brand__mark" src="assets/logo-jp-192.webp" width="44" height="44" alt="" />
           <span class="brand__text"><span class="brand__name">JP Brothers</span><span class="brand__sub">Barbería</span></span>
         </a>
 
@@ -178,10 +179,15 @@
       </div>
     </footer>
 
-    <!-- Botón flotante de WhatsApp -->
-    <a class="wa-fab" data-link="whatsapp" href="https://wa.me/56940916058" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp">
-      <span data-icon="whatsapp" data-size="28"></span>
-    </a>
+    <!-- Botones flotantes de contacto: Instagram y WhatsApp -->
+    <div class="fab-stack">
+      <a class="ig-fab" data-link="instagram" href="https://www.instagram.com/jp.brotherss/" target="_blank" rel="noopener" aria-label="Ver Instagram">
+        <span data-icon="instagram" data-size="26"></span>
+      </a>
+      <a class="wa-fab" data-link="whatsapp" href="https://wa.me/56940916058" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp">
+        <span data-icon="whatsapp" data-size="28"></span>
+      </a>
+    </div>
 
     <div id="cookie-banner"></div>
   </body>

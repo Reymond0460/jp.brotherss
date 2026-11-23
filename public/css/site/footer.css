@@ -44,11 +44,35 @@
   }
 }
 
-.wa-fab {
+/* Botones flotantes de contacto (Instagram arriba, WhatsApp abajo). */
+.fab-stack {
   position: fixed;
   right: max(var(--s-4), env(safe-area-inset-right, 0px));
   bottom: max(var(--s-4), env(safe-area-inset-bottom, 0px));
   z-index: 40;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--s-3);
+}
+
+.ig-fab {
+  display: grid;
+  place-items: center;
+  width: 3.2rem;
+  height: 3.2rem;
+  border-radius: 50%;
+  background: linear-gradient(45deg, #f09433, #dc2743 55%, #bc1888);
+  color: #fff;
+  box-shadow: var(--shadow-2);
+  transition: transform 0.15s ease;
+}
+
+.ig-fab:hover {
+  transform: scale(1.06);
+}
+
+.wa-fab {
   display: grid;
   place-items: center;
   width: 3.7rem;

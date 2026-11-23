@@ -56,7 +56,7 @@ export async function startApp({ repo, user, appRoot }) {
   const nav = el(
     'aside',
     { class: 'admin-nav' },
-    el('a', { class: 'brand admin-nav__brand', href: '#resumen' }, el('img', { class: 'brand__mark', src: 'assets/logo.svg', width: 36, height: 36, alt: '' }), el('span', { class: 'brand__text' }, el('span', { class: 'brand__name' }, 'JP Brothers'), el('span', { class: 'brand__sub' }, 'Panel'))),
+    el('a', { class: 'brand admin-nav__brand', href: '#resumen' }, el('img', { class: 'brand__mark', src: 'assets/logo-jp-192.webp', width: 36, height: 36, alt: '' }), el('span', { class: 'brand__text' }, el('span', { class: 'brand__name' }, 'JP Brothers'), el('span', { class: 'brand__sub' }, 'Panel'))),
     el('nav', { class: 'admin-nav__links', 'aria-label': 'Secciones del panel' }, links),
     el(
       'div',
