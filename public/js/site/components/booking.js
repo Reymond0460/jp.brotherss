@@ -264,7 +264,7 @@ export function initBooking({ repo, catalog }) {
     const ticket = buildTicket({
       label: booking ? 'Turno reservado' : 'Tu turno',
       tag: booking ? 'Por confirmar' : '',
-      big: (booking?.time ?? time) || '··:··',
+      big: (booking?.time ?? time) || '',
       list: [
         ['Servicio', booking?.serviceName ?? service?.name ?? '—'],
         ['Día', booking ? relativeDayLabel(booking.date) : date ? relativeDayLabel(date) : '—'],

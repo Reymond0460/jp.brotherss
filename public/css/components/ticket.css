@@ -67,6 +67,7 @@
   line-height: 0.9;
   letter-spacing: -0.02em;
   font-variant-numeric: tabular-nums;
+  min-height: 0.9em; /* conserva la altura cuando aún no hay hora elegida (queda en blanco) */
 }
 
 .ticket__row {

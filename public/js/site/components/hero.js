@@ -23,11 +23,11 @@ export async function initHero({ repo, catalog }) {
   // El ticket muestra la próxima hora libre del servicio más corto (normalmente un corte).
   const service = [...catalog.services].sort((a, b) => a.durationMin - b.durationMin || a.order - b.order)[0];
   if (!service) {
-    replaceContent(host, buildTicket({ label: 'Turno', big: '··:··', list: [['Estado', 'Servicios próximamente']] }));
+    replaceContent(host, buildTicket({ label: 'Turno', big: '', list: [['Estado', 'Servicios próximamente']] }));
     return;
   }
 
-  replaceContent(host, buildTicket({ label: 'Próxima hora libre', big: '··:··', list: [['Día', 'Buscando…'], ['Servicio', service.name]] }));
+  replaceContent(host, buildTicket({ label: 'Próxima hora libre', big: '', list: [['Día', 'Buscando…'], ['Servicio', service.name]] }));
 
   let next = null;
   try {
@@ -37,7 +37,7 @@ export async function initHero({ repo, catalog }) {
   }
 
   if (!next) {
-    replaceContent(host, buildTicket({ label: 'Agenda completa', big: '··:··', list: [['Estado', 'Sin horas por ahora'], ['Consulta', 'Escríbenos por WhatsApp']] }));
+    replaceContent(host, buildTicket({ label: 'Agenda completa', big: '', list: [['Estado', 'Sin horas por ahora'], ['Consulta', 'Escríbenos por WhatsApp']] }));
     return;
   }
 
