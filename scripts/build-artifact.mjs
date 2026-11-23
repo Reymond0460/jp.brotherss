@@ -31,6 +31,9 @@ const stubFirebase = {
 
 const LOGO = 'assets/logo-jp-192.webp';
 const logoDataUri = `data:image/webp;base64,${(await readFile(resolve(PUBLIC, LOGO))).toString('base64')}`;
+// Imagen grande de la portada (también va incrustada).
+const HERO_IMAGE = 'assets/logo-jp-768.webp';
+const heroDataUri = `data:image/webp;base64,${(await readFile(resolve(PUBLIC, HERO_IMAGE))).toString('base64')}`;
 
 async function bundleJs(entry) {
   const result = await build({
@@ -74,7 +77,7 @@ for (const [index, name] of PAGES.entries()) {
   const title = index === 0 ? 'JP Brothers Barbería' : pick(html, /<title>([\s\S]*?)<\/title>/, 'title');
   const cssEntry = pick(html, /<link rel="stylesheet" href="([^"]+)"/, 'hoja de estilos');
   const jsEntry = pick(html, /<script type="module" src="([^"]+)"/, 'script');
-  let body = pick(html, /<body[^>]*>([\s\S]*)<\/body>/, 'body').replaceAll(LOGO, logoDataUri);
+  let body = pick(html, /<body[^>]*>([\s\S]*)<\/body>/, 'body').replaceAll(LOGO, logoDataUri).replaceAll(HERO_IMAGE, heroDataUri);
 
   const css = await bundleCss(cssEntry);
   const js = await bundleJs(jsEntry);
