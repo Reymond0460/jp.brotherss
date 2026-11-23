@@ -4,7 +4,6 @@
  */
 import { addDays, todayISO } from '../core/dates.js';
 import { generateBookingId, parseBookingCode } from '../core/booking-code.js';
-import { normalizePhone } from '../core/format.js';
 import { computeSlots, parseSlotKey, slotKeysFor } from '../domain/availability.js';
 import { priceFor } from '../domain/pricing.js';
 import { STATUS } from '../domain/booking-status.js';
@@ -107,17 +106,15 @@ export async function createBooking({ repo, service, promo = null, date, time, c
 }
 
 /**
- * "Ver mi reserva": se necesita el código Y el teléfono con el que se reservó.
- * @returns {Promise<{ok:true, booking:object} | {ok:false, reason:'invalid-code'|'invalid-phone'|'not-found'}>}
+ * "Ver mi reserva": basta con el código. Es un código aleatorio de 8 caracteres
+ * (≈ 850 mil millones de combinaciones) y Firestore no permite listar las reservas,
+ * así que solo quien lo conoce puede consultarla.
+ * @returns {Promise<{ok:true, booking:object} | {ok:false, reason:'invalid-code'|'not-found'}>}
  */
-export async function lookupBooking(repo, codeInput, phoneInput) {
+export async function lookupBooking(repo, codeInput) {
   const id = parseBookingCode(codeInput);
   if (!id) return { ok: false, reason: 'invalid-code' };
-  const phone = normalizePhone(phoneInput);
-  if (!phone) return { ok: false, reason: 'invalid-phone' };
 
   const booking = await repo.getBooking(id);
-  // Misma respuesta para "no existe" y "teléfono distinto": no revela qué códigos existen.
-  if (!booking || booking.clientPhone !== phone) return { ok: false, reason: 'not-found' };
-  return { ok: true, booking };
+  return booking ? { ok: true, booking } : { ok: false, reason: 'not-found' };
 }

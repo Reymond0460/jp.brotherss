@@ -9,7 +9,7 @@ Hecho con **HTML + CSS + JavaScript puro** (sin frameworks, sin bundler). Datos 
 **Sitio público** (`public/index.html`)
 - Portada con estado "abierto / cerrado" y la próxima hora libre.
 - Promos vigentes, servicios con precios y reserva en 3 pasos (servicio → día y hora → datos).
-- "Ver mi reserva" con código + celular (permite cancelar o pedir cambios por WhatsApp).
+- "Ver mi reserva" solo con el código (permite cancelar o pedir cambios por WhatsApp).
 - Ubicación con botones a Google Maps, Apple Maps y Waze, y mapa incrustado (con consentimiento).
 - Políticas de privacidad y de cookies, aviso de cookies, cabeceras de seguridad.
 

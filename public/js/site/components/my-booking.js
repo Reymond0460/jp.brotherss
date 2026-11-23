@@ -1,14 +1,14 @@
 /**
- * "Ver mi reserva": el cliente escribe su código y su celular y ve el estado de su hora.
+ * "Ver mi reserva": el cliente escribe su código de reserva y ve el estado de su hora.
  * Desde aquí puede cancelarla (si aún no empieza) o escribir al barbero para cambiarla.
  */
-import { DEMO_BOOKING_ID, DEMO_PHONE, STORAGE_KEYS } from '../../config/constants.js';
+import { DEMO_BOOKING_ID, STORAGE_KEYS } from '../../config/constants.js';
 import { ENV } from '../../config/env.js';
 import { $, el, replaceContent } from '../../core/dom.js';
 import { listen } from '../../core/events.js';
 import { formatBookingCode } from '../../core/booking-code.js';
 import { relativeDayLabel } from '../../core/dates.js';
-import { formatCLP, formatPhone } from '../../core/format.js';
+import { formatCLP } from '../../core/format.js';
 import { safeStorage } from '../../core/safe-storage.js';
 import { canClientCancel, STATUS_LABEL } from '../../domain/booking-status.js';
 import { generalMessage, whatsappUrl } from '../../domain/whatsapp.js';
@@ -20,8 +20,7 @@ import { toast } from '../../ui/toast.js';
 
 const ERRORS = {
   'invalid-code': 'El código no tiene el formato correcto. Ejemplo: JP-7K3M-9QXA.',
-  'invalid-phone': 'Ingresa el celular con el que reservaste.',
-  'not-found': 'No encontramos una reserva con esos datos. Revisa el código y el celular.',
+  'not-found': 'No encontramos una reserva con ese código. Revísalo e inténtalo de nuevo.',
 };
 
 export function initMyBooking({ repo, catalog }) {
@@ -31,24 +30,18 @@ export function initMyBooking({ repo, catalog }) {
   const result = el('div', { class: 'my-booking__result', 'aria-live': 'polite' });
   const message = el('p', { class: 'field__error', role: 'alert' });
   const codeInput = el('input', { class: 'input mono', id: 'mb-code', name: 'code', type: 'text', autocomplete: 'off', autocapitalize: 'characters', spellcheck: 'false', placeholder: 'JP-XXXX-XXXX', required: true });
-  const phoneInput = el('input', { class: 'input', id: 'mb-phone', name: 'tel', type: 'tel', autocomplete: 'tel', inputmode: 'tel', placeholder: '9 1234 5678', required: true });
   const submit = el('button', { class: 'btn btn--primary', type: 'submit' }, 'Buscar mi reserva');
 
   const form = el(
     'form',
     { class: 'my-booking__form stack', novalidate: true },
-    el(
-      'div',
-      { class: 'form-grid' },
-      el('div', { class: 'field' }, el('label', { class: 'field__label', for: 'mb-code' }, 'Código de reserva'), codeInput),
-      el('div', { class: 'field' }, el('label', { class: 'field__label', for: 'mb-phone' }, 'Celular'), phoneInput),
-    ),
+    el('div', { class: 'field' }, el('label', { class: 'field__label', for: 'mb-code' }, 'Código de reserva'), codeInput, el('p', { class: 'field__hint' }, 'Lo recibiste al reservar. Ejemplo: JP-7K3M-9QXA.')),
     message,
     el('div', { class: 'row' }, submit),
   );
 
   const demoHint = ENV.demo
-    ? el('p', { class: 'notice notice--blue' }, icon('info', { size: 18 }), el('span', {}, 'Modo demo. Prueba con el código ', el('strong', { class: 'mono' }, formatBookingCode(DEMO_BOOKING_ID)), ' y el celular ', el('strong', {}, formatPhone(DEMO_PHONE)), '.'))
+    ? el('p', { class: 'notice notice--blue' }, icon('info', { size: 18 }), el('span', {}, 'Modo demo. Prueba con el código ', el('strong', { class: 'mono' }, formatBookingCode(DEMO_BOOKING_ID)), '.'))
     : null;
 
   replaceContent(root, el('div', { class: 'my-booking' }, el('div', { class: 'stack' }, form, demoHint), result));
@@ -66,7 +59,7 @@ export function initMyBooking({ repo, catalog }) {
     submit.disabled = true;
     submit.textContent = 'Buscando…';
     try {
-      const found = await lookupBooking(repo, codeInput.value, phoneInput.value);
+      const found = await lookupBooking(repo, codeInput.value);
       if (!found.ok) {
         message.textContent = ERRORS[found.reason];
         replaceContent(result);
